@@ -1,0 +1,144 @@
+require "spec_helper"
+
+describe AttributesFor::AttributesForHelper do
+
+  describe AttributesFor::AttributesForHelper::AttributeBuilder do
+
+    let(:object) do
+      Company.new(1, "Evil Corp", "+4723232323", nil, "name@example.com",
+        "http://example.com", DateTime.now
+      )
+    end
+    let(:current_user) { User.new }
+
+    before do
+      store_translations(:en, activerecord: {
+        attributes: {
+          company: {
+            name: "Name",
+            phone: "Phone",
+            fax: "Fax",
+            email: "Email",
+            website: "Website",
+            created_at: "Created At"
+          },
+      }})
+    end
+
+    describe "#attr" do
+      it "renders an attribute" do
+        expect(builder(object).attr(:name)).to eq(
+          "<i id=\"name\"> Name: #{object.name}</i>"
+        )
+      end
+
+      context "when content is empty string or nil" do
+        it "outputs 'not_set' translation" do
+          store_translations(:en, not_set: "Not set") do
+            expect(builder(object).attr(:fax)).to eq(
+              "<i id=\"fax\"> Fax: Not set</i>"
+            )
+
+            object.fax = ""
+            expect(builder(object).attr(:fax)).to eq(
+              "<i id=\"fax\"> Fax: Not set</i>"
+            )
+          end
+        end
+      end
+    end
+
+    describe "#phone" do
+      it "renders a phone link" do
+        expect(builder(object).phone(:phone)).to eq(
+          "<i id=\"phone\" class=\"fa fa-phone\"> Phone: " +
+          "<a title=\"Phone\" href=\"tel:+4723232323\"> +472-323-2323</a>" +
+          "</i>"
+        )
+      end
+    end
+
+    describe "#email" do
+      it "renders an email link" do
+        expect(builder(object).email(:email)).to eq(
+          "<i id=\"email\" class=\"fa fa-envelope\"> Email: " +
+          "<a title=\"Email\" href=\"mailto: name@example.com\">name@example.com</a>" +
+          "</i>"
+        )
+      end
+    end
+
+    describe "#url" do
+      it "renders a link" do
+        expect(builder(object).url(:website)).to eq(
+          "<i id=\"website\" class=\"fa fa-globe\"> Website: " +
+          "<a title=\"Website\" href=\"http://example.com\"> http://example.com</a>" +
+          "</i>"
+        )
+      end
+    end
+
+    describe "#date" do
+      it "renders a time, date or datetime" do
+        expect(builder(object).date(:created_at)).to eq(
+          "<i id=\"created_at\" class=\"fa fa-clock-o\"> Created At: #{I18n.l(object.created_at)}</i>"
+        )
+      end
+    end
+
+    describe "options" do
+      describe "css" do
+        it "uses the css given" do
+          expect(builder(object).attr(:name, class: "fa fa-user")).to eq(
+            "<i id=\"name\" class=\"fa fa-user\"> Name: #{object.name}</i>"
+          )
+        end
+      end
+
+      describe "use_label" do
+        it "renders without label" do
+          expect(builder(object).attr(:name, use_label: false)).to eq(
+            "<i id=\"name\"> #{object.name}</i>"
+          )
+        end
+      end
+
+      describe "can_read" do
+        it "returns empty string if lacking permissions" do
+          expect(builder(object).attr(:website, can_read: :company_website)).to eq('')
+        end
+      end
+
+      describe "id" do
+        it "sets the dom id" do
+          expect(builder(object).attr(:name, id: :new_id)).to eq(
+            "<i id=\"new_id\"> Name: #{object.name}</i>"
+          )
+        end
+      end
+
+    end
+
+    describe "translations" do
+      it "translates the label" do
+        store_translations(:en, activerecord: {attributes: {company: {name: "Navn"}}})
+        expect(builder(object).attr(:name)).to eq(
+          "<i id=\"name\"> Navn: #{object.name}</i>"
+        )
+      end
+    end
+
+    def builder(object, options = {})
+      @builder = AttributesFor::AttributesForHelper::AttributeBuilder.new(
+        object,
+        options.merge(current_user: current_user)
+      )
+    end
+
+  end
+
+  def store_translations(locale, translations)
+    I18n.backend.store_translations locale, translations
+  end
+
+end
