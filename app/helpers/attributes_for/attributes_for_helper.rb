@@ -83,9 +83,9 @@ module AttributesFor
 
       def wrap_content(attribute, content, options = {})
         options = options.dup
-        options[:use_label] = options[:use_label] === false ? false : true
+        options[:label] = options[:label] === false ? false : true
         content_tag(:i, id: id(attribute, options), class: options[:class]) do
-          options[:use_label] ? " #{human_name(attribute)}: #{content}".html_safe : " #{content}".html_safe
+          options[:label] ? " #{human_name(attribute)}: #{content}".html_safe : " #{content}".html_safe
         end
       end
 

@@ -95,11 +95,13 @@ describe AttributesFor::AttributesForHelper do
         end
       end
 
-      describe "use_label" do
-        it "renders without label" do
-          expect(builder(object).attr(:name, use_label: false)).to eq(
-            "<i id=\"name\"> #{object.name}</i>"
-          )
+      describe "label" do
+        context "when false" do
+          it "renders without label" do
+            expect(builder(object).attr(:name, label: false)).to eq(
+              "<i id=\"name\"> #{object.name}</i>"
+            )
+          end
         end
       end
 
