@@ -22,7 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`attributes_for` generates a formatted value prefixed by a translated
+label and a standard icon using the API in the example below. It can also generate a
+standard label value pair given an attribute name using the `attr` method.
+
+```ruby
+<%= attributes_for(@company) do |b| %>
+  <%= b.phone :phone %>
+  <%= b.email :email %>
+  <%= b.url :website %>
+  <%= b.date :created_at %>
+  <%= b.attr :credit_rating %>
+  <%= b.string "A string" %>
+<% end %>
+```
 
 ## Development
 
