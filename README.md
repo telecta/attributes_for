@@ -1,6 +1,6 @@
 # AttributesFor
 
-Easily present formatted ActiveModel attributes with translated label and optional an icon.
+Easily present formatted ActiveModel attributes with translated label and an optional icon.
 
 ## Installation
 
