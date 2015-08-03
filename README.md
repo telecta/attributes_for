@@ -1,5 +1,8 @@
 # AttributesFor
 
+[![Build
+Status](https://travis-ci.org/blacktangent/attributes_for.svg?branch=master)](https://travis-ci.org/blacktangent/attributes_for)
+
 Easily present formatted ActiveModel attributes with translated label and an optional icon.
 
 ## Installation
