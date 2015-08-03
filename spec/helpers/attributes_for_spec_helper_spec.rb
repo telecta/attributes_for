@@ -9,7 +9,6 @@ describe AttributesFor::AttributesForHelper do
         "http://example.com", DateTime.now
       )
     end
-    let(:current_user) { User.new }
 
     before do
       store_translations(:en, activerecord: {
@@ -114,12 +113,6 @@ describe AttributesFor::AttributesForHelper do
         end
       end
 
-      describe "can_read" do
-        it "returns empty string if lacking permissions" do
-          expect(builder(object).attribute(:website, can_read: :company_website)).to eq('')
-        end
-      end
-
       describe "id" do
         it "sets the dom id" do
           expect(builder(object).attribute(:name, id: :new_id)).to eq(
@@ -140,10 +133,7 @@ describe AttributesFor::AttributesForHelper do
     end
 
     def builder(object, options = {})
-      @builder = AttributesFor::AttributesForHelper::AttributeBuilder.new(
-        object,
-        options.merge(current_user: current_user)
-      )
+      @builder = AttributesFor::AttributesForHelper::AttributeBuilder.new(object)
     end
 
   end
