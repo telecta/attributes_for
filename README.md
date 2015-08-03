@@ -2,6 +2,8 @@
 
 [![Build
 Status](https://travis-ci.org/blacktangent/attributes_for.svg?branch=master)](https://travis-ci.org/blacktangent/attributes_for)
+[![Code
+Climate](https://codeclimate.com/github/blacktangent/attributes_for.png)](https://codeclimate.com/github/blacktangent/attributes_for)
 
 Easily present formatted ActiveModel attributes with translated label and an optional icon.
 
