@@ -66,6 +66,15 @@ describe AttributesFor::AttributesForHelper do
           "</i>"
         )
       end
+
+      context "when email not present" do
+        it "does not render the link" do
+          object.email = nil
+          expect(builder(object).email(:email)).to eq(
+            "<i id=\"email\" class=\"fa fa-envelope\"> Email: Not set</i>"
+          )
+        end
+      end
     end
 
     describe "#url" do

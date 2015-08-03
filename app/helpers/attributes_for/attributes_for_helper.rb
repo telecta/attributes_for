@@ -17,76 +17,82 @@ module AttributesFor
       end
 
       def phone(attribute_name, options = {})
-        value = attribute_value(attribute_name)
         options[:class] = options[:class] || 'fa fa-phone'
-        attribute(attribute_name,
-          link_to(" #{number_to_phone(value)}", "tel:#{value}", title: human_name(attribute_name)),
-          options
-        )
+
+        content(attribute_name, options) do |value|
+          link_to(" #{number_to_phone(value)}", "tel:#{value}", title: human_name(attribute_name))
+        end
       end
 
       def email(attribute_name, options = {})
-        value = attribute_value(attribute_name)
         options[:class] = options[:class] || 'fa fa-envelope'
-        attribute(attribute_name,
-          mail_to(" #{value}", value, title: human_name(attribute_name)),
-          options
-        )
+
+        content(attribute_name, options) do |value|
+          mail_to(" #{value}", value, title: human_name(attribute_name))
+        end
       end
 
       def url(attribute_name, options = {})
-        value = attribute_value(attribute_name)
         options[:class] = options[:class] || 'fa fa-globe'
-        attribute(attribute_name,
-          link_to(" #{value}", value, title: human_name(attribute_name)),
-          options
-        )
+
+        content(attribute_name, options) do |value|
+          link_to(" #{value}", value, title: human_name(attribute_name))
+        end
       end
 
       def date(attribute_name, options = {})
         options[:class] = options[:class] || 'fa fa-clock-o'
-        attribute(attribute_name,
-          I18n.l(attribute_value(attribute_name), format: options[:format]),
-          options
-        )
+
+        content(attribute_name, options) do |value|
+          I18n.l(value, format: options[:format])
+        end
       end
 
       def string(content, options = {})
-        attribute(nil, content, options)
+        wrap_label_and_content(nil, content, options)
       end
 
       def attr(attribute_name, options = {})
-        attribute(attribute_name, attribute_value(attribute_name), options)
+        content(attribute_name, options)
       end
 
       private
 
-      def attribute(attribute_name, content, options = {})
+      def content(attribute_name, options = {}, &block)
         if can_read = options[:can_read]
           return '' unless can? :read, can_read
         end
-        wrap_content(attribute_name, content, options)
-      end
 
-      def attribute_value(attribute)
-        value = if attribute.is_a?(String)
+        value = if attribute_name.is_a?(String)
           attribute
         else
-          object.public_send(attribute)
+          object.public_send(attribute_name)
         end
-        value.to_s.empty? ? I18n.t(:not_set) : value
+
+        content = if !value.present?
+          I18n.t(:not_set)
+        elsif block_given?
+          yield value
+        else
+          value
+        end
+
+        wrap_label_and_content(attribute_name, content, options)
       end
 
       def id(attribute, options)
         (options[:id] || attribute).to_s
       end
 
-      def wrap_content(attribute, content, options = {})
-        options = options.dup
-        options[:label] = options[:label] === false ? false : true
+      def wrap_label_and_content(attribute, content, options = {})
         content_tag(:i, id: id(attribute, options), class: options[:class]) do
-          options[:label] ? " #{human_name(attribute)}: #{content}".html_safe : " #{content}".html_safe
+          label(attribute, options) + content
         end
+      end
+
+      def label(attribute, options)
+        return " " if options[:label] === false
+        " #{human_name(attribute)}: ".html_safe
       end
 
       def human_name(attribute)
@@ -94,7 +100,5 @@ module AttributesFor
       end
 
     end
-
   end
-
 end
