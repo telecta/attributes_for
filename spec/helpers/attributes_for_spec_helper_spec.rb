@@ -24,7 +24,7 @@ describe AttributesFor::AttributesForHelper do
       }})
     end
 
-    describe "#attr" do
+    describe "#attribute" do
       it "renders an attribute" do
         expect(builder(object).attribute(:name)).to eq(
           "<i id=\"name\"> Name: #{object.name}</i>"
@@ -33,16 +33,16 @@ describe AttributesFor::AttributesForHelper do
 
       context "when content is empty string or nil" do
         it "outputs 'not_set' translation" do
-          store_translations(:en, not_set: "Not set") do
-            expect(builder(object).attr(:fax)).to eq(
-              "<i id=\"fax\"> Fax: Not set</i>"
-            )
+          store_translations(:en, not_set: "Not set")
 
-            object.fax = ""
-            expect(builder(object).attr(:fax)).to eq(
-              "<i id=\"fax\"> Fax: Not set</i>"
-            )
-          end
+          expect(builder(object).attribute(:fax)).to eq(
+            "<i id=\"fax\"> Fax: Not set</i>"
+          )
+
+          object.fax = ""
+          expect(builder(object).attribute(:fax)).to eq(
+            "<i id=\"fax\"> Fax: Not set</i>"
+          )
         end
       end
     end
