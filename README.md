@@ -30,7 +30,7 @@ strings can also be presented using the `string` method.
   <%= b.email :email %>
   <%= b.url :website %>
   <%= b.date :created_at %>
-  <%= b.attr :credit_rating %>
+  <%= b.attribute :credit_rating %>
   <%= b.string "A string" %>
 <% end %>
 ```

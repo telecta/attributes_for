@@ -27,7 +27,7 @@ describe AttributesFor::AttributesForHelper do
 
     describe "#attr" do
       it "renders an attribute" do
-        expect(builder(object).attr(:name)).to eq(
+        expect(builder(object).attribute(:name)).to eq(
           "<i id=\"name\"> Name: #{object.name}</i>"
         )
       end
@@ -98,7 +98,7 @@ describe AttributesFor::AttributesForHelper do
     describe "options" do
       describe "css" do
         it "uses the css given" do
-          expect(builder(object).attr(:name, class: "fa fa-user")).to eq(
+          expect(builder(object).attribute(:name, class: "fa fa-user")).to eq(
             "<i id=\"name\" class=\"fa fa-user\"> Name: #{object.name}</i>"
           )
         end
@@ -107,7 +107,7 @@ describe AttributesFor::AttributesForHelper do
       describe "label" do
         context "when false" do
           it "renders without label" do
-            expect(builder(object).attr(:name, label: false)).to eq(
+            expect(builder(object).attribute(:name, label: false)).to eq(
               "<i id=\"name\"> #{object.name}</i>"
             )
           end
@@ -116,13 +116,13 @@ describe AttributesFor::AttributesForHelper do
 
       describe "can_read" do
         it "returns empty string if lacking permissions" do
-          expect(builder(object).attr(:website, can_read: :company_website)).to eq('')
+          expect(builder(object).attribute(:website, can_read: :company_website)).to eq('')
         end
       end
 
       describe "id" do
         it "sets the dom id" do
-          expect(builder(object).attr(:name, id: :new_id)).to eq(
+          expect(builder(object).attribute(:name, id: :new_id)).to eq(
             "<i id=\"new_id\"> Name: #{object.name}</i>"
           )
         end
@@ -133,7 +133,7 @@ describe AttributesFor::AttributesForHelper do
     describe "translations" do
       it "translates the label" do
         store_translations(:en, activerecord: {attributes: {company: {name: "Navn"}}})
-        expect(builder(object).attr(:name)).to eq(
+        expect(builder(object).attribute(:name)).to eq(
           "<i id=\"name\"> Navn: #{object.name}</i>"
         )
       end

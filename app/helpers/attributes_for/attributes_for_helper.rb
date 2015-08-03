@@ -52,7 +52,7 @@ module AttributesFor
         wrap_content(" #{content}", options)
       end
 
-      def attr(attribute_name, options = {})
+      def attribute(attribute_name, options = {})
         content(attribute_name, options)
       end
 
