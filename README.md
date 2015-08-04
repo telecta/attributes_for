@@ -42,6 +42,14 @@ strings can also be presented using the `string` method.
 </ul>
 ```
 
+## Options
+
+Available options:
+
+* __:label__ - Disables label if set to false
+* __:css__ - Override element's CSS
+* __:id__ - Set element's ID
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

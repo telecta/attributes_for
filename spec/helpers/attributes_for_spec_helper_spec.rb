@@ -106,8 +106,10 @@ describe AttributesFor::AttributesForHelper do
       describe "label" do
         context "when false" do
           it "renders without label" do
-            expect(builder(object).attribute(:name, label: false)).to eq(
-              "<i id=\"name\"> #{object.name}</i>"
+            expect(builder(object).phone(:phone, label: false)).to eq(
+              "<i id=\"phone\" class=\"fa fa-phone\"> " +
+              "<a title=\"Phone\" href=\"tel:+4723232323\"> +472-323-2323</a>" +
+              "</i>"
             )
           end
         end

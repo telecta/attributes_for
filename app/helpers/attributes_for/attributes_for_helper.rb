@@ -89,7 +89,7 @@ module AttributesFor
       end
 
       def label(attribute, options)
-        return " " if options[:label] === false
+        return " ".html_safe if options[:label] === false
         " #{human_name(attribute)}: ".html_safe
       end
 
