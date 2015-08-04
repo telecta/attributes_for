@@ -23,6 +23,10 @@ Or install it yourself as:
 
     $ gem install attributes_for
 
+Run generator to add I18n locales:
+
+    $ rails generate attributes_for:install
+
 ## Usage
 
 Present the attributes using the API in the example below. It can also generate a
