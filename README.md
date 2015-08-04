@@ -37,6 +37,7 @@ strings can also be presented using the `string` method.
     <li><%= b.url :website %></li>
     <li><%= b.date :created_at %></li>
     <li><%= b.attribute :credit_rating %></li>
+    <li><%= b.boolean :active %></li>
     <li><%= b.string "A string" %></li>
   <% end %>
 </ul>

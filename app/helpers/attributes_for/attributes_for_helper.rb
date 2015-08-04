@@ -15,6 +15,14 @@ module AttributesFor
         @object = object
       end
 
+      def boolean(attribute_name, options = {})
+        options[:class] ||= 'fa fa-check'
+
+        content(attribute_name, options) do |value|
+          I18n.t("attributes_for.#{value.to_s}")
+        end
+      end
+
       def phone(attribute_name, options = {})
         options[:class] ||= 'fa fa-phone'
 
@@ -67,8 +75,8 @@ module AttributesFor
       end
 
       def prepare_value(value, &block)
-        if !value.present?
-          I18n.t(:not_set)
+        if value.to_s.empty?
+          I18n.t "attributes_for.not_set"
         elsif block_given?
           yield value
         else

@@ -1,0 +1,5 @@
+en:
+  attributes_for:
+    not_set: "Not set"
+    "true": "Yes"
+    "false": "No"

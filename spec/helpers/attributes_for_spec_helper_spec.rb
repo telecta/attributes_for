@@ -6,7 +6,7 @@ describe AttributesFor::AttributesForHelper do
 
     let(:object) do
       Company.new(1, "Evil Corp", "+4723232323", nil, "name@example.com",
-        "http://example.com", DateTime.now
+        "http://example.com", true, DateTime.now
       )
     end
 
@@ -19,9 +19,13 @@ describe AttributesFor::AttributesForHelper do
             fax: "Fax",
             email: "Email",
             website: "Website",
+            active: "Active",
             created_at: "Created At"
           },
-      }})
+      }}, attributes_for: {
+            not_set: "Not set",
+            "true" => "Yes",
+      })
     end
 
     describe "#attribute" do
@@ -33,8 +37,6 @@ describe AttributesFor::AttributesForHelper do
 
       context "when content is empty string or nil" do
         it "outputs 'not_set' translation" do
-          store_translations(:en, not_set: "Not set")
-
           expect(builder(object).attribute(:fax)).to eq(
             "<i id=\"fax\"> Fax: Not set</i>"
           )
@@ -44,6 +46,14 @@ describe AttributesFor::AttributesForHelper do
             "<i id=\"fax\"> Fax: Not set</i>"
           )
         end
+      end
+    end
+
+    describe "#boolean", focus: true do
+      it "renders 'Yes' or 'No'" do
+        expect(builder(object).boolean(:active)).to eq(
+          "<i id=\"active\" class=\"fa fa-check\"> Active: Yes</i>"
+        )
       end
     end
 

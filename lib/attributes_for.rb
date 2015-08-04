@@ -4,6 +4,6 @@ require "action_view"
 require "attributes_for/engine"
 require "helpers/attributes_for/attributes_for_helper"
 
-module ViewBuilder
+module AttributesFor
   # Your code goes here...
 end
