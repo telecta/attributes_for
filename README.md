@@ -34,15 +34,19 @@ standard label value pair given an attribute name using the `attr` method. Arbit
 strings can also be presented using the `string` method.
 
 ```ruby
-<ul class="unstyled">
+<ul class="list-unstyled">
   <%= attributes_for @company do |b| %>
+    <li><%= b.attribute :name, class: 'fa fa-building-o' %></li>
     <li><%= b.phone :phone %></li>
     <li><%= b.email :email %></li>
     <li><%= b.url :website %></li>
-    <li><%= b.date :created_at %></li>
-    <li><%= b.attribute :credit_rating %></li>
+    <li>
+      <%= b.attribute(:user, class: 'fa fa-user') do %>
+        <%= link_to @company.user_name, url_for(@company.user) %>
+      <% end %>
+    </li>
     <li><%= b.boolean :active %></li>
-    <li><%= b.string "A string" %></li>
+    <li><%= b.date :created_at, format: :long %> </li>
   <% end %>
 </ul>
 ```

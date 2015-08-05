@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2015-08-05
+### Added
+- All formatting methods now takes a block. The contents of the block
+  will be displayed after the label.
+
 ## [0.2.0] - 2015-08-04
 ### Added
 - `boolean` formatting helper, will show 'Yes' or 'No' depending on

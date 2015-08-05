@@ -2,86 +2,84 @@ module AttributesFor
   module AttributesForHelper
 
     def attributes_for(object, options = {}, &block)
-      builder = AttributeBuilder.new(object)
+      builder = AttributeBuilder.new(object, self)
       capture builder, &block
     end
 
     class AttributeBuilder
       include ActionView::Helpers
 
-      attr_accessor :object, :output_buffer
+      attr_accessor :object, :template, :output_buffer
 
-      def initialize(object)
-        @object = object
+      def initialize(object, template)
+        @object, @template = object, template
       end
 
-      def boolean(attribute_name, options = {})
+      def boolean(attribute_name, options = {}, &block)
         options[:class] ||= 'fa fa-check'
-
-        content(attribute_name, options) do |value|
-          I18n.t("attributes_for.#{value.to_s}")
-        end
+        content(attribute_name, __method__, options, &block)
       end
 
-      def phone(attribute_name, options = {})
+      def phone(attribute_name, options = {}, &block)
         options[:class] ||= 'fa fa-phone'
-
-        content(attribute_name, options) do |value|
-          link_to(" #{number_to_phone(value)}", "tel:#{value}", title: human_name(attribute_name))
-        end
+        content(attribute_name, __method__, options, &block)
       end
 
-      def email(attribute_name, options = {})
+      def email(attribute_name, options = {}, &block)
         options[:class] ||= 'fa fa-envelope'
-
-        content(attribute_name, options) do |value|
-          mail_to(" #{value}", value, title: human_name(attribute_name))
-        end
+        content(attribute_name, __method__, options, &block)
       end
 
-      def url(attribute_name, options = {})
+      def url(attribute_name, options = {}, &block)
         options[:class] ||= 'fa fa-globe'
-
-        content(attribute_name, options) do |value|
-          link_to(" #{value}", value, title: human_name(attribute_name))
-        end
+        content(attribute_name, __method__, options, &block)
       end
 
-      def date(attribute_name, options = {})
+      def date(attribute_name, options = {}, &block)
         options[:class] ||= 'fa fa-clock-o'
-
-        content(attribute_name, options) do |value|
-          I18n.l(value, format: options[:format])
-        end
+        content(attribute_name, __method__, options, &block)
       end
 
       def string(content, options = {})
         wrap_content(" #{content}", options)
       end
 
-      def attribute(attribute_name, options = {})
-        content(attribute_name, options)
+      def attribute(attribute_name, options = {}, &block)
+        content(attribute_name, __method__, options, &block)
       end
 
       private
 
-      def content(attribute_name, options = {}, &block)
-        options[:id] ||= attribute_name.to_s
-
-        wrap_content(
-          label(attribute_name, options) + prepare_value(attribute_value(attribute_name), &block),
-          options
-        )
+      def content(attribute_name, method, options = {}, &block)
+        wrap_content(label(attribute_name, options) + build_content(attribute_name, method, options, &block), options)
       end
 
-      def prepare_value(value, &block)
-        if value.to_s.empty?
-          I18n.t "attributes_for.not_set"
-        elsif block_given?
-          yield value
-        else
+      def build_content(attribute_name, method, options = {}, &block)
+        return template.capture(&block) if block_given?
+
+        value = attribute_value(attribute_name)
+
+        return I18n.t "attributes_for.not_set" if value.to_s.empty?
+
+        case method.to_sym
+        when :attribute
           value
+        when :boolean
+          I18n.t("attributes_for.#{value.to_s}")
+        when :date
+          I18n.l(value, format: options[:format])
+        when :email
+          mail_to(" #{value}", value, title: human_name(attribute_name))
+        when :phone
+          link_to(" #{number_to_phone(value)}", "tel:#{value}", title: human_name(attribute_name))
+        when :url
+          link_to(" #{value}", value, title: human_name(attribute_name))
         end
+      end
+
+      def content(attribute_name, method, options = {}, &block)
+        options[:id] ||= attribute_name.to_s
+        wrap_content(label(attribute_name, options) + build_content(attribute_name, method, options, &block), options)
       end
 
       def wrap_content(content, options = {})

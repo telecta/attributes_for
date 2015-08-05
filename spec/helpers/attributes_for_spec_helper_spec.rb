@@ -47,13 +47,33 @@ describe AttributesFor::AttributesForHelper do
           )
         end
       end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).attribute(:name) do
+            "New Content"
+          end).to eq(
+            "<i id=\"name\"> Name: New Content</i>"
+          )
+        end
+      end
     end
 
-    describe "#boolean", focus: true do
+    describe "#boolean" do
       it "renders 'Yes' or 'No'" do
         expect(builder(object).boolean(:active)).to eq(
           "<i id=\"active\" class=\"fa fa-check\"> Active: Yes</i>"
         )
+      end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).boolean(:active) do
+            "New Content"
+          end).to eq(
+            "<i id=\"active\" class=\"fa fa-check\"> Active: New Content</i>"
+          )
+        end
       end
     end
 
@@ -64,6 +84,16 @@ describe AttributesFor::AttributesForHelper do
           "<a title=\"Phone\" href=\"tel:+4723232323\"> +472-323-2323</a>" +
           "</i>"
         )
+      end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).phone(:phone) do
+            "New Content"
+          end).to eq(
+            "<i id=\"phone\" class=\"fa fa-phone\"> Phone: New Content</i>"
+          )
+        end
       end
     end
 
@@ -84,6 +114,16 @@ describe AttributesFor::AttributesForHelper do
           )
         end
       end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).email(:email) do
+            "New Content"
+          end).to eq(
+            "<i id=\"email\" class=\"fa fa-envelope\"> Email: New Content</i>"
+          )
+        end
+      end
     end
 
     describe "#url" do
@@ -94,6 +134,16 @@ describe AttributesFor::AttributesForHelper do
           "</i>"
         )
       end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).url(:website) do
+            "New Content"
+          end).to eq(
+            "<i id=\"website\" class=\"fa fa-globe\"> Website: New Content</i>"
+          )
+        end
+      end
     end
 
     describe "#date" do
@@ -101,6 +151,16 @@ describe AttributesFor::AttributesForHelper do
         expect(builder(object).date(:created_at)).to eq(
           "<i id=\"created_at\" class=\"fa fa-clock-o\"> Created At: #{I18n.l(object.created_at)}</i>"
         )
+      end
+
+      context "when called with block" do
+        it "uses the block as content" do
+          expect(builder(object).date(:created_at) do
+            "New Content"
+          end).to eq(
+            "<i id=\"created_at\" class=\"fa fa-clock-o\"> Created At: New Content</i>"
+          )
+        end
       end
     end
 
@@ -145,7 +205,7 @@ describe AttributesFor::AttributesForHelper do
     end
 
     def builder(object, options = {})
-      @builder = AttributesFor::AttributesForHelper::AttributeBuilder.new(object)
+      @builder = AttributesFor::AttributesForHelper::AttributeBuilder.new(object, ActionView::Base.new)
     end
 
   end
