@@ -26,6 +26,9 @@ Or install it yourself as:
 Run generator to add I18n locales:
 
     $ rails generate attributes_for:install
+    
+## Screenshot
+![Screenshot](https://cloud.githubusercontent.com/assets/1222916/9083171/fac21df2-3b92-11e5-837a-71e70ee24cdd.png)
 
 ## Usage
 
