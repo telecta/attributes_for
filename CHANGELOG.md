@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.2] - 2015-08-06
+### Changed
+- Rewrote implementation using method_missing
+
 ## [0.3.1] - 2015-08-06
 ### Fixed
 - Fixed stylesheet loading (insert 'require' during installation).
