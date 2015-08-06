@@ -37,6 +37,8 @@ module AttributesFor
             I18n.t("attributes_for.#{value.to_s}")
           when :date
             I18n.l(value, format: options[:format])
+          when :duration
+            ChronicDuration.output(value)
           when :email
             mail_to(" #{value}", value, title: human_name(attribute_name))
           when :phone
@@ -77,11 +79,12 @@ module AttributesFor
 
       def icon_map(method)
         {
-          boolean: 'fa fa-check',
-          date:    'fa fa-clock-o',
-          email:   'fa fa-envelope',
-          phone:   'fa fa-phone',
-          url:     'fa fa-globe',
+          boolean:  'fa fa-check',
+          date:     'fa fa-calendar',
+          duration: 'fa fa-clock-o',
+          email:    'fa fa-envelope',
+          phone:    'fa fa-phone',
+          url:      'fa fa-globe',
         }[method]
       end
 

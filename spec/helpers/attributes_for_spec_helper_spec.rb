@@ -6,7 +6,7 @@ describe AttributesFor::AttributesForHelper do
 
     let(:object) do
       Company.new(1, "Evil Corp", "+4723232323", nil, "name@example.com",
-        "http://example.com", true, DateTime.now
+        "http://example.com", 123456, true, DateTime.now
       )
     end
 
@@ -19,6 +19,7 @@ describe AttributesFor::AttributesForHelper do
             fax: "Fax",
             email: "Email",
             website: "Website",
+            duration: "Duration",
             active: "Active",
             created_at: "Created At"
           },
@@ -126,6 +127,14 @@ describe AttributesFor::AttributesForHelper do
       end
     end
 
+    describe "#duration" do
+      it "renders an integer as days, hours, minutes and seconds" do
+        expect(builder(object).duration(:duration)).to eq(
+          "<i id=\"duration\" class=\"fa fa-clock-o\"> Duration: 1 day 10 hrs 17 mins 36 secs</i>"
+        )
+      end
+    end
+
     describe "#url" do
       it "renders a link" do
         expect(builder(object).url(:website)).to eq(
@@ -149,7 +158,7 @@ describe AttributesFor::AttributesForHelper do
     describe "#date" do
       it "renders a time, date or datetime" do
         expect(builder(object).date(:created_at)).to eq(
-          "<i id=\"created_at\" class=\"fa fa-clock-o\"> Created At: #{I18n.l(object.created_at)}</i>"
+          "<i id=\"created_at\" class=\"fa fa-calendar\"> Created At: #{I18n.l(object.created_at)}</i>"
         )
       end
 
@@ -158,7 +167,7 @@ describe AttributesFor::AttributesForHelper do
           expect(builder(object).date(:created_at) do
             "New Content"
           end).to eq(
-            "<i id=\"created_at\" class=\"fa fa-clock-o\"> Created At: New Content</i>"
+            "<i id=\"created_at\" class=\"fa fa-calendar\"> Created At: New Content</i>"
           )
         end
       end

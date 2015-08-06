@@ -3,7 +3,7 @@ require 'attributes_for'
 
 require "active_model"
 
-Company = Struct.new(:id, :name, :phone, :fax, :email, :website, :active, :created_at) do
+Company = Struct.new(:id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at) do
   extend ActiveModel::Naming
 
   def self.human_attribute_name(attribute)
