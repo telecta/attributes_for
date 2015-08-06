@@ -2,14 +2,13 @@ module AttributesFor
   module AttributesForHelper
 
     def attributes_for(object, options = {}, &block)
-      builder = AttributeBuilder.new(object, self)
-      capture builder, &block
+      capture AttributeBuilder.new(object, self), &block
     end
 
     class AttributeBuilder
       include ActionView::Helpers
 
-      attr_accessor :object, :template, :output_buffer
+      attr_accessor :object, :template
 
       def initialize(object, template)
         @object, @template = object, template
