@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.1] - 2015-08-06
+### Fixed
+- Fixed stylesheet loading (insert 'require' during installation).
+
 ## [0.3.0] - 2015-08-05
 ### Added
 - All formatting methods now takes a block. The contents of the block

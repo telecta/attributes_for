@@ -1,3 +1,5 @@
 module AttributesFor
-  class Engine < Rails::Engine; end
+  class Engine < Rails::Engine
+    require 'font-awesome-rails'
+  end
 end
