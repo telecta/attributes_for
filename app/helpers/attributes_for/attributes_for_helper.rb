@@ -20,7 +20,7 @@ module AttributesFor
       end
 
       def method_missing(m, *args, &block)
-       build_content(m, *args, &block)
+        build_content(m, *args, &block)
       end
 
       private
