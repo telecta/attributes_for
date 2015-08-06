@@ -33,7 +33,7 @@ Run generator to add I18n locales:
 ## Usage
 
 Present the attributes using the API in the example below. It can also generate a
-standard label value pair given an attribute name using the `attr` method. Arbitrary
+standard label value pair given an attribute name using the `attribute` method. Arbitrary
 strings can also be presented using the `string` method.
 
 ```ruby
