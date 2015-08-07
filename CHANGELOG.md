@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.3.3] - 2015-08-06
+## [0.4.0] - 2015-08-07
 ### Added
 - `duration` helper. Displays and integer in days, hours, minutes and
   seconds
