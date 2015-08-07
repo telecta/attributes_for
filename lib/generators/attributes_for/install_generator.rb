@@ -15,7 +15,7 @@ module AttributesFor
               require_string: " *= require attributes_for",
               where: {before: %r{.*require_self}},
             },
-            "scss" => {
+            "css.scss" => {
               require_string: "@import \"attributes_for\";",
               where: {after: %r{\A}},
             },
