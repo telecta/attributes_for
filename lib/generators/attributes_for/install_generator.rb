@@ -9,10 +9,25 @@ module AttributesFor
       end
 
       def inject_stylesheets
-        file = "app/assets/stylesheets/application.css"
+        in_root do
+          {
+            "css" => {
+              require_string: " *= require attributes_for",
+              where: {before: %r{.*require_self}},
+            },
+            "scss" => {
+              require_string: "@import \"attributes_for\";",
+              where: {after: %r{\A}},
+            },
+          }.each do |extension, strategy|
+            file = "app/assets/stylesheets/application.#{extension}"
 
-        if File.exists?(Rails.root.join(file))
-          inject_into_file file, " *= require attributes_for\n", {before: %r{.*require_self}}
+            if File.exists?(Rails.root.join(file))
+              stylesheet = "attributes_for.#{extension}"
+              copy_file stylesheet, "app/assets/stylesheets/#{stylesheet}"
+              inject_into_file file, strategy[:require_string] + "\n", strategy[:where]
+            end
+          end
         end
       end
     end

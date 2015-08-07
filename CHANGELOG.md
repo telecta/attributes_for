@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.3] - 2015-08-06
+### Added
+- `duration` helper. Displays and integer in days, hours, minutes and
+  seconds
+### Fixed
+- Handle installation in projects using SASS. Reinstall required since
+  stylesheet is now copied into project.
+
 ## [0.3.2] - 2015-08-06
 ### Changed
 - Rewrote implementation using method_missing
