@@ -26,9 +26,9 @@ Or install it yourself as:
 Run generator to add I18n locales:
 
     $ rails generate attributes_for:install
-    
+
 ## Screenshot
-![Screenshot](https://cloud.githubusercontent.com/assets/1222916/9083171/fac21df2-3b92-11e5-837a-71e70ee24cdd.png)
+![Screenshot](https://cloud.githubusercontent.com/assets/1222916/9128630/e3bf2cda-3cf5-11e5-804b-c481734d0197.png)
 
 ## Usage
 
@@ -48,6 +48,7 @@ strings can also be presented using the `string` method.
         <%= link_to @company.user_name, url_for(@company.user) %>
       <% end %>
     </li>
+    <li><%= b.duration :duration %></li>
     <li><%= b.boolean :active %></li>
     <li><%= b.date :created_at, format: :long %> </li>
   <% end %>
