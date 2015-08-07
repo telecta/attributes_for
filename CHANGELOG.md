@@ -4,6 +4,7 @@
 ### Added
 - `duration` helper. Displays and integer in days, hours, minutes and
   seconds
+
 ### Fixed
 - Handle installation in projects using SASS. Reinstall required since
   stylesheet is now copied into project.
