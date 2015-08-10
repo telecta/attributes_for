@@ -12,20 +12,20 @@ module AttributesFor
         in_root do
           {
             "css" => {
-              require_string: " *= require attributes_for",
+              require_string: " *= require font-awesome",
               where: {before: %r{.*require_self}},
             },
             "css.scss" => {
-              require_string: "@import \"attributes_for\";",
+              require_string: "@import \"font-awesome\";",
               where: {after: %r{\A}},
             },
           }.each do |extension, strategy|
             file = "app/assets/stylesheets/application.#{extension}"
 
             if File.exists?(Rails.root.join(file))
-              stylesheet = "attributes_for.#{extension}"
-              copy_file stylesheet, "app/assets/stylesheets/#{stylesheet}"
-              inject_into_file file, strategy[:require_string] + "\n", strategy[:where]
+              unless File.foreach(file).grep(/#{strategy[:require_string]}/).any?
+                inject_into_file file, strategy[:require_string] + "\n", strategy[:where]
+              end
             end
           end
         end

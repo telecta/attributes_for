@@ -6,8 +6,7 @@
   seconds
 
 ### Fixed
-- Handle installation in projects using SASS. Reinstall required since
-  stylesheet is now copied into project.
+- Handle installation in projects using SASS.
 
 ## [0.3.2] - 2015-08-06
 ### Changed
