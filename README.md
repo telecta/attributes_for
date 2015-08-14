@@ -32,11 +32,11 @@ Run generator to add I18n locales:
 
 ## Usage
 
-Present the attributes using the API in the example below. It can also generate a
+Present attributes using the API in the example below. It can also generate a
 standard label value pair given an attribute name using the `attribute` method. Arbitrary
 strings can also be presented using the `string` method.
 
-```ruby
+```erb
 <ul class="list-unstyled">
   <%= attributes_for @company do |b| %>
     <li><%= b.attribute :name, class: 'fa fa-building-o' %></li>
