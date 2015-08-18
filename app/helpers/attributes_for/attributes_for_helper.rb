@@ -38,7 +38,7 @@ module AttributesFor
           when :date
             I18n.l(value, format: options[:format])
           when :duration
-            ChronicDuration.output(value)
+            ChronicDuration.output(value, :keep_zero => true)
           when :email
             mail_to(" #{value}", value, title: human_name(attribute_name))
           when :phone
