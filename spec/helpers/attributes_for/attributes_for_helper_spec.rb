@@ -133,6 +133,15 @@ describe AttributesFor::AttributesForHelper do
           "<i id=\"duration\" class=\"fa fa-clock-o\"> Duration: 1 day 10 hrs 17 mins 36 secs</i>"
         )
       end
+
+      context "when duration 0" do
+        it "renders 0" do
+          object.duration = 0
+          expect(builder(object).duration(:duration)).to match(
+            /Duration: 0/
+          )
+        end
+      end
     end
 
     describe "#url" do
