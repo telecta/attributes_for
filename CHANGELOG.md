@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.1] - 2015-08-18
+### Added
+- Use `phony_rails` to format phone numbers.
+
 ## [0.4.0] - 2015-08-07
 ### Added
 - `duration` helper. Displays and integer in days, hours, minutes and

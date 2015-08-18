@@ -5,7 +5,7 @@ describe AttributesFor::AttributesForHelper do
   describe AttributesFor::AttributesForHelper::AttributeBuilder do
 
     let(:object) do
-      Company.new(1, "Evil Corp", "+4723232323", nil, "name@example.com",
+      Company.new(1, "Evil Corp", "4723232323", nil, "name@example.com",
         "http://example.com", 123456, true, DateTime.now
       )
     end
@@ -82,7 +82,7 @@ describe AttributesFor::AttributesForHelper do
       it "renders a phone link" do
         expect(builder(object).phone(:phone)).to eq(
           "<i id=\"phone\" class=\"fa fa-phone\"> Phone: " +
-          "<a title=\"Phone\" href=\"tel:+4723232323\"> +472-323-2323</a>" +
+          "<a title=\"Phone\" href=\"tel:+4723232323\"> +47 23 23 23 23</a>" +
           "</i>"
         )
       end
@@ -187,7 +187,7 @@ describe AttributesFor::AttributesForHelper do
           it "renders without label" do
             expect(builder(object).phone(:phone, label: false)).to eq(
               "<i id=\"phone\" class=\"fa fa-phone\"> " +
-              "<a title=\"Phone\" href=\"tel:+4723232323\"> +472-323-2323</a>" +
+              "<a title=\"Phone\" href=\"tel:+4723232323\"> +47 23 23 23 23</a>" +
               "</i>"
             )
           end

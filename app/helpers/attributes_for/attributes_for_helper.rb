@@ -42,7 +42,7 @@ module AttributesFor
           when :email
             mail_to(" #{value}", value, title: human_name(attribute_name))
           when :phone
-            link_to(" #{number_to_phone(value)}", "tel:#{value}", title: human_name(attribute_name))
+            link_to(" #{value.to_s.phony_formatted(:format => :international)}", "tel:+#{value}", title: human_name(attribute_name))
           when :url
             link_to(" #{value}", value, title: human_name(attribute_name))
           else

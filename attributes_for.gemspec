@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 4.0'
   spec.add_dependency 'font-awesome-rails', '~> 4.0'
   spec.add_dependency 'chronic_duration', '~> 0.10'
+  spec.add_dependency 'phony_rails', '~> 0.12'
 end
