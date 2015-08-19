@@ -44,8 +44,10 @@ strings can also be presented using the `string` method.
   <%= attributes_for @company do |b| %>
     <li><%= b.attribute :name, class: 'fa fa-building-o' %></li>
     <li><%= b.phone :phone %></li>
+    <li><%= b.phone :fax, class: 'fa fa-fax' %></li>
     <li><%= b.email :email %></li>
-    <li><%= b.url :website %></li>
+    <li><%= b.email :support_email %></li>
+    <li><%= b.url :website, id: :site %></li>
     <li>
       <%= b.attribute(:user, class: 'fa fa-user') do %>
         <%= link_to @company.user_name, url_for(@company.user) %>
