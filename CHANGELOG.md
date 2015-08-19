@@ -4,6 +4,9 @@
 ### Added
 - Use `phony_rails` to format phone numbers.
 
+### Fixed
+- Zero values for duration not displayed. Now showing '0'.
+
 ## [0.4.0] - 2015-08-07
 ### Added
 - `duration` helper. Displays and integer in days, hours, minutes and

@@ -1,11 +1,14 @@
+[travis]: https://travis-ci.org/blacktangent/attributes_for
+[codeclimate]: https://codeclimate.com/github/blacktangent/attributes_for
+
 # AttributesFor
 
-[![Build
-Status](https://travis-ci.org/blacktangent/attributes_for.svg?branch=master)](https://travis-ci.org/blacktangent/attributes_for)
-[![Code
-Climate](https://codeclimate.com/github/blacktangent/attributes_for.png)](https://codeclimate.com/github/blacktangent/attributes_for)
+[![Build Status](https://travis-ci.org/blacktangent/attributes_for.svg?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/blacktangent/attributes_for/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/blacktangent/attributes_for/badges/coverage.svg)][codeclimate]
 
-Easily present formatted ActiveModel attributes with translated label and an optional icon.
+ActiveView Helper to present formatted ActiveModel attributes with
+icons.
 
 ## Installation
 

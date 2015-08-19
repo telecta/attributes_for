@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ole J. Rosendahl"]
   spec.email         = ["ole.johnny.rosendahl@gmail.com"]
 
-  spec.summary       = "Helper for displaying model attributes with icons"
+  spec.summary       = "ActiveView Helper to present formatted ActiveModel attributes with icons."
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/blacktangent/attributes_for"
   spec.license       = "MIT"
