@@ -40,11 +40,11 @@ module AttributesFor
           when :duration
             ChronicDuration.output(value, :keep_zero => true)
           when :email
-            mail_to(" #{value}", value, title: human_name(attribute_name))
+            mail_to(value, value, title: human_name(attribute_name))
           when :phone
-            link_to(" #{value.to_s.phony_formatted(:format => :international)}", "tel:+#{value}", title: human_name(attribute_name))
+            link_to(value.to_s.phony_formatted(:format => :international), "tel:+#{value}", title: human_name(attribute_name))
           when :url
-            link_to(" #{value}", value, title: human_name(attribute_name))
+            link_to(value, value, title: human_name(attribute_name))
           else
             value
           end

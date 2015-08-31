@@ -82,7 +82,7 @@ describe AttributesFor::AttributesForHelper do
       it "renders a phone link" do
         expect(builder(object).phone(:phone)).to eq(
           "<i id=\"phone\" class=\"fa fa-phone\"> Phone: " +
-          "<a title=\"Phone\" href=\"tel:+4723232323\"> +47 23 23 23 23</a>" +
+            "<a title=\"Phone\" href=\"tel:+4723232323\">+47 23 23 23 23</a>" +
           "</i>"
         )
       end
@@ -102,7 +102,7 @@ describe AttributesFor::AttributesForHelper do
       it "renders an email link" do
         expect(builder(object).email(:email)).to eq(
           "<i id=\"email\" class=\"fa fa-envelope\"> Email: " +
-          "<a title=\"Email\" href=\"mailto: name@example.com\">name@example.com</a>" +
+            "<a title=\"Email\" href=\"mailto:name@example.com\">name@example.com</a>" +
           "</i>"
         )
       end
@@ -148,7 +148,7 @@ describe AttributesFor::AttributesForHelper do
       it "renders a link" do
         expect(builder(object).url(:website)).to eq(
           "<i id=\"website\" class=\"fa fa-globe\"> Website: " +
-          "<a title=\"Website\" href=\"http://example.com\"> http://example.com</a>" +
+            "<a title=\"Website\" href=\"http://example.com\">http://example.com</a>" +
           "</i>"
         )
       end
@@ -196,7 +196,7 @@ describe AttributesFor::AttributesForHelper do
           it "renders without label" do
             expect(builder(object).phone(:phone, label: false)).to eq(
               "<i id=\"phone\" class=\"fa fa-phone\"> " +
-              "<a title=\"Phone\" href=\"tel:+4723232323\"> +47 23 23 23 23</a>" +
+              "<a title=\"Phone\" href=\"tel:+4723232323\">+47 23 23 23 23</a>" +
               "</i>"
             )
           end
