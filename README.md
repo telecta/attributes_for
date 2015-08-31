@@ -1,11 +1,12 @@
 [travis]: https://travis-ci.org/blacktangent/attributes_for
 [codeclimate]: https://codeclimate.com/github/blacktangent/attributes_for
+[coveralls]: https://coveralls.io/r/blacktangent/attributes_for
 
 # AttributesFor
 
 [![Build Status](https://travis-ci.org/blacktangent/attributes_for.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/blacktangent/attributes_for/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/blacktangent/attributes_for/badges/coverage.svg)][codeclimate]
+[![Test Coverage](http://img.shields.io/coveralls/blacktangent/attributes_for/master.svg)][coveralls]
 
 ActiveView Helper to present formatted ActiveModel attributes with
 icons.
