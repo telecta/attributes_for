@@ -60,6 +60,11 @@ strings can also be presented using the `string` method.
     <li><%= b.duration :duration %></li>
     <li><%= b.boolean :active %></li>
     <li><%= b.date :created_at, format: :long %> </li>
+    <li>
+      <%= b.string "Label" do %>
+        Content
+      <% end %>
+    </li>
   <% end %>
 </ul>
 ```

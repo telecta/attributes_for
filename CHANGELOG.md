@@ -6,6 +6,10 @@
 - Use minitest instead of rspec
 - Replaced `phony_rails` with `phony`.
 
+### Fixed
+- `string` helper now working as expected. Requires block to be passed
+  for content.
+
 ## [0.4.1] - 2015-08-18
 ### Added
 - Use `phony_rails` to format phone numbers.

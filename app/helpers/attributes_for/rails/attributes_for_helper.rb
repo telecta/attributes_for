@@ -15,8 +15,8 @@ module AttributesFor
           @object, @template = object, template
         end
 
-        def string(content, options = {})
-          wrap_content(" #{content}", options)
+        def string(label, options = {}, &block)
+          wrap_content(" #{label}: " + template.capture(&block), options)
         end
 
         def method_missing(m, *args, &block)
@@ -26,7 +26,7 @@ module AttributesFor
         private
 
         def build_content(method, attribute_name, options = {}, &block)
-          value = attribute_value(attribute_name)
+          value = object.public_send(attribute_name)
 
           content = if block_given?
             template.capture(&block)
@@ -59,14 +59,6 @@ module AttributesFor
 
         def wrap_content(content, options = {})
           content_tag(:i, content, id: options[:id], class: options[:class])
-        end
-
-        def attribute_value(attribute_name)
-          if attribute_name.is_a?(String)
-            attribute_name
-          else
-            object.public_send(attribute_name)
-          end
         end
 
         def label(attribute, options)

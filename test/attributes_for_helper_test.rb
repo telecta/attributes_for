@@ -118,9 +118,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     assert_select "i[id=\"duration\"][class=\"fa fa-clock-o\"]", text: "Duration: 0 secs"
   end
 
-  test "#string renders a string" do
-    with_concat_attributes_for(object) { |b| b.string("String") }
-    assert_select "i", text: "String"
+  test "#string renders a string with content" do
+    with_concat_attributes_for(object) do |b|
+      b.string("String", id: "new_id", class: "custom") do
+        "Content"
+      end
+    end
+    assert_select "i[id=\"new_id\"][class=\"custom\"]", text: "String: Content"
   end
 
   test "#url renders a link" do
