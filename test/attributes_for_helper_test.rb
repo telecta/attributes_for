@@ -12,7 +12,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
       end
 
     end.new(
-      1, "Evil Corp", "4723232323", nil, "name@example.com",
+      1, "Project 1", "4723232323", nil, "name@example.com",
       "http://example.com", 123456, true, DateTime.now
      )
   end
@@ -87,6 +87,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "#date renders date or datetime" do
+    store_translations(:en, activerecord: {attributes: {project: {created_at: "Created At"}}}) do
+      with_concat_attributes_for(object) { |b| b.date(:created_at) }
+    end
+    assert_select "i[id=\"created_at\"][class=\"fa fa-calendar\"]", text: "Created At: #{I18n.l(object.created_at)}"
+  end
+
   test "#email renders a email link" do
     store_translations(:en, activerecord: {attributes: {project: {email: "Email"}}}) do
       with_concat_attributes_for(object) { |b| b.email(:email) }
@@ -111,4 +118,34 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     assert_select "i[id=\"duration\"][class=\"fa fa-clock-o\"]", text: "Duration: 0 secs"
   end
 
+  test "#string renders a string" do
+    with_concat_attributes_for(object) { |b| b.string("String") }
+    assert_select "i", text: "String"
+  end
+
+  test "#url renders a link" do
+    store_translations(:en, activerecord: {attributes: {project: {website: "Website"}}}) do
+      with_concat_attributes_for(object) { |b| b.url(:website) }
+    end
+    assert_select "i[id=\"website\"][class=\"fa fa-globe\"]", text: "Website: http://example.com" do |element|
+      assert_select element, "a[title=\"Website\"][href=\"http://example.com\"]"
+    end
+  end
+
+  test "options[:label] set to false, renders without label" do
+    store_translations(:en, activerecord: {attributes: {project: {website: "Website"}}}) do
+      with_concat_attributes_for(object) { |b| b.attribute(:name, label: false) }
+    end
+    assert_select "i", text: "Project 1"
+  end
+
+  test "options[:class] set to 'new_id', renders element with custom id" do
+    with_concat_attributes_for(object) { |b| b.attribute(:name, id: "new_id") }
+    assert_select "i[id=\"new_id\"]"
+  end
+
+  test "options[:class] set to 'fa fa-user' renders element with given class(es)" do
+    with_concat_attributes_for(object) { |b| b.attribute(:name, class: 'fa fa-user') }
+    assert_select "i[class=\"fa fa-user\"]"
+  end
 end
