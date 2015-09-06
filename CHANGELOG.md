@@ -4,6 +4,7 @@
 ## [0.4.2] - 2015-09-05
 ## Changed
 - Use minitest instead of rspec
+- Replaced `phony_rails` with `phony`.
 
 ## [0.4.1] - 2015-08-18
 ### Added
