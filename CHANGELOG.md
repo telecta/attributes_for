@@ -1,5 +1,10 @@
 # Changelog
 
+
+## [0.4.2] - 2015-09-05
+## Changed
+- Use minitest instead of rspec
+
 ## [0.4.1] - 2015-08-18
 ### Added
 - Use `phony_rails` to format phone numbers.
