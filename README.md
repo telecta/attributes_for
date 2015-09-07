@@ -2,6 +2,8 @@
 [codeclimate]: https://codeclimate.com/github/blacktangent/attributes_for
 [coveralls]: https://coveralls.io/r/blacktangent/attributes_for
 [rubygems]: https://rubygems.org/gems/attributes_for
+[fontawesome]: https://fortawesome.github.io/Font-Awesome
+[fontawesomerails]: https://github.com/bokmann/font-awesome-rails
 
 
 # AttributesFor
@@ -33,6 +35,10 @@ Or install it yourself as:
 Run generator to add I18n locales:
 
     $ rails generate attributes_for:install
+
+Preferred icon and CSS framework is [Font Awesome][fontawesome] Bring
+[Font Awesome][fontawesome] into your project by using
+[font-awesome-rails][fontawesomerails] or your preferred method.
 
 ## Screenshot
 ![Screenshot](https://cloud.githubusercontent.com/assets/1222916/9355402/295b6324-46a3-11e5-9f8c-ff864b837cdd.png)
