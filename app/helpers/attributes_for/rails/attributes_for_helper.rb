@@ -43,7 +43,8 @@ module AttributesFor
             when :email
               mail_to(value, value, title: human_name(attribute_name))
             when :phone
-              link_to(Phony.format(value.to_s), "tel:+#{value}", title: human_name(attribute_name))
+              phone_number = Phony.format(Phony.normalize(value.to_s), format: :international)
+              link_to(phone_number, "tel:#{phone_number}", title: human_name(attribute_name))
             when :url
               link_to(value, value, title: human_name(attribute_name))
             else

@@ -5,14 +5,14 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   def object
     @o ||= Struct.new(
       :id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at
-    ) do
 
+    ) do
       def self.human_attribute_name(attribute)
         I18n.t("activerecord.attributes.project.#{attribute}")
       end
 
     end.new(
-      1, "Project 1", "4723232323", nil, "name@example.com",
+      1, "Project 1", "+4723232323", nil, "name@example.com",
       "http://example.com", 123456, true, DateTime.now
      )
   end
@@ -83,7 +83,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
 
     assert_select "i[id=\"phone\"][class=\"fa fa-phone\"]", text: "Phone: +47 23 23 23 23" do |element|
-      assert_select element, "a[title=\"Phone\"][href=\"tel:+4723232323\"]"
+      assert_select element, "a[title=\"Phone\"][href=\"tel:+47 23 23 23 23\"]"
     end
   end
 

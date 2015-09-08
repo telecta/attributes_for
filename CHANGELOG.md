@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.4.3] - 2015-09-08
+### Fixed
+- Made `phone` more rubust, now normalizes phone number before
+  formatting, thus handling plus and other characters.
 
 ## [0.4.2] - 2015-09-05
-## Changed
+### Changed
 - Use minitest instead of rspec
 - Replaced `phony_rails` with `phony`.
 
