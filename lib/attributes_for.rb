@@ -1,3 +1,5 @@
 require "attributes_for/version"
 require "attributes_for/engine"
 require "phony"
+require "action_view"
+require "active_model"

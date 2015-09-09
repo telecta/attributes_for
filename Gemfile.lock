@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     attributes_for (0.4.3)
+      actionview (>= 3.2, < 5.0)
+      activemodel (>= 3.2, < 5.0)
       chronic_duration (~> 0.10)
       font-awesome-rails (~> 4.0)
       phony (~> 2.0)
@@ -23,6 +25,9 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    activemodel (4.2.4)
+      activesupport (= 4.2.4)
+      builder (~> 3.1)
     activesupport (4.2.4)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
