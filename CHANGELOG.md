@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.4] - 2015-09-10
+### Fixed
+- Explicitly require dependencies.
+
 ## [0.4.3] - 2015-09-08
 ### Fixed
 - Made `phone` more rubust, now normalizes phone number before
