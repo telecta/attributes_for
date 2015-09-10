@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    attributes_for (0.4.3)
+    attributes_for (0.4.4)
       actionview (>= 3.2, < 5.0)
       activemodel (>= 3.2, < 5.0)
       chronic_duration (~> 0.10)
