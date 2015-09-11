@@ -43,6 +43,11 @@ Preferred icon and CSS framework is [Font Awesome][fontawesome] Bring
 ## Screenshot
 ![Screenshot](https://cloud.githubusercontent.com/assets/1222916/9355402/295b6324-46a3-11e5-9f8c-ff864b837cdd.png)
 
+## Sample Application
+
+Sample applciaiton using `attributes_for` can be found
+[here](https://github.com/blacktangent/attributes_for).
+
 ## Usage
 
 Present attributes using the API in the example below. It can also generate a
