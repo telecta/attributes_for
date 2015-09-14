@@ -68,7 +68,7 @@ module AttributesFor
         end
 
         def human_name(attribute)
-          object.class.human_attribute_name(attribute)
+          object.class.human_attribute_name(attribute, default: attribute.to_s.titleize)
         end
 
         def icon_map(method)

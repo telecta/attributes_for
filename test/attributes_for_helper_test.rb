@@ -7,8 +7,8 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
       :id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at
 
     ) do
-      def self.human_attribute_name(attribute)
-        I18n.t("activerecord.attributes.project.#{attribute}")
+      def self.human_attribute_name(attribute, options = {})
+        I18n.t("activerecord.attributes.project.#{attribute}", options)
       end
 
     end.new(
@@ -30,41 +30,35 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   end
 
   test "#attribute renders a label followed by value of the object attribute" do
-    store_translations(:en, activerecord: {attributes: {project: {name: "Name"}}}) do
-      with_concat_attributes_for(object) { |b| b.attribute(:name) }
-    end
-
+    with_concat_attributes_for(object) { |b| b.attribute(:name) }
     assert_select "i[id=\"name\"]", text: "Name: #{object.name}"
   end
 
   test "#attribute renders 'Not set' if the attribute is nil" do
-    store_translations(:en,
-      activerecord: {attributes: {project: {fax: "Fax"}}},
-      attributes_for: {not_set: "Not set" }
-    ) do
+    store_translations(:en, attributes_for: {not_set: "Not set" }) do
       with_concat_attributes_for(object) { |b| b.attribute(:fax) }
     end
-
     assert_select "i[id=\"fax\"]", text: "Fax: Not set"
   end
 
   test "#attribute renders 'Not set' if the attributes is an empty string" do
-    store_translations(:en,
-      activerecord: {attributes: {project: {fax: "Fax"}}},
-      attributes_for: {not_set: "Not set" }
-    ) do
+    store_translations(:en, attributes_for: {not_set: "Not set" }) do
       object.fax = ""
       with_concat_attributes_for(object) { |b| b.attribute(:fax) }
     end
-
     assert_select "i[id=\"fax\"]", text: "Fax: Not set"
   end
 
   test "#attribute called with a block uses the block as content" do
-    store_translations(:en, activerecord: {attributes: {project: {name: "Name"}}}) do
-      with_concat_attributes_for(object) { |b| b.attribute(:name) { "New Content" } }
-    end
+    with_concat_attributes_for(object) { |b| b.attribute(:name) { "New Content" } }
     assert_select "i[id=\"name\"]", text: "Name: New Content"
+  end
+
+  test "#attribute translates the label" do
+    store_translations(:en, activerecord: {attributes: {project: {name: "Nome"}}}) do
+      with_concat_attributes_for(object) { |b| b.attribute(:name) }
+    end
+    assert_select "i[id=\"name\"]", text: "Nome: #{object.name}"
   end
 
   test "#boolean renders 'Yes' or 'No'" do
@@ -78,9 +72,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   end
 
   test "#phone renders a phone link" do
-    store_translations(:en, activerecord: {attributes: {project: {phone: "Phone"}}}) do
-      with_concat_attributes_for(object) { |b| b.phone(:phone) }
-    end
+    with_concat_attributes_for(object) { |b| b.phone(:phone) }
 
     assert_select "i[id=\"phone\"][class=\"fa fa-phone\"]", text: "Phone: +47 23 23 23 23" do |element|
       assert_select element, "a[title=\"Phone\"][href=\"tel:+47 23 23 23 23\"]"
@@ -88,33 +80,25 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   end
 
   test "#date renders date or datetime" do
-    store_translations(:en, activerecord: {attributes: {project: {created_at: "Created At"}}}) do
-      with_concat_attributes_for(object) { |b| b.date(:created_at) }
-    end
+    with_concat_attributes_for(object) { |b| b.date(:created_at) }
     assert_select "i[id=\"created_at\"][class=\"fa fa-calendar\"]", text: "Created At: #{I18n.l(object.created_at)}"
   end
 
   test "#email renders a email link" do
-    store_translations(:en, activerecord: {attributes: {project: {email: "Email"}}}) do
-      with_concat_attributes_for(object) { |b| b.email(:email) }
-    end
+    with_concat_attributes_for(object) { |b| b.email(:email) }
     assert_select "i[id=\"email\"][class=\"fa fa-envelope\"]", text: "Email: name@example.com" do |element|
       assert_select element, "a[title=\"Email\"][href=\"mailto:name@example.com\"]"
     end
   end
 
   test "#duration renders an integer in human readable form" do
-    store_translations(:en, activerecord: {attributes: {project: {duration: "Duration"}}}) do
-      with_concat_attributes_for(object) { |b| b.duration(:duration) }
-    end
+    with_concat_attributes_for(object) { |b| b.duration(:duration) }
     assert_select "i[id=\"duration\"][class=\"fa fa-clock-o\"]", text: "Duration: 1 day 10 hrs 17 mins 36 secs"
   end
 
   test "#duration renders '0 secs' when integer is zero or not set" do
-    store_translations(:en, activerecord: {attributes: {project: {duration: "Duration"}}}) do
-      object.duration = 0
-      with_concat_attributes_for(object) { |b| b.duration(:duration) }
-    end
+    object.duration = 0
+    with_concat_attributes_for(object) { |b| b.duration(:duration) }
     assert_select "i[id=\"duration\"][class=\"fa fa-clock-o\"]", text: "Duration: 0 secs"
   end
 
@@ -128,18 +112,14 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   end
 
   test "#url renders a link" do
-    store_translations(:en, activerecord: {attributes: {project: {website: "Website"}}}) do
-      with_concat_attributes_for(object) { |b| b.url(:website) }
-    end
+    with_concat_attributes_for(object) { |b| b.url(:website) }
     assert_select "i[id=\"website\"][class=\"fa fa-globe\"]", text: "Website: http://example.com" do |element|
       assert_select element, "a[title=\"Website\"][href=\"http://example.com\"]"
     end
   end
 
   test "options[:label] set to false, renders without label" do
-    store_translations(:en, activerecord: {attributes: {project: {website: "Website"}}}) do
-      with_concat_attributes_for(object) { |b| b.attribute(:name, label: false) }
-    end
+    with_concat_attributes_for(object) { |b| b.attribute(:name, label: false) }
     assert_select "i", text: "Project 1"
   end
 
