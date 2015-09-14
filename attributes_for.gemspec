@@ -20,12 +20,11 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 1.9.3'
 
-  spec.add_dependency 'railties', '>= 3.2', '< 5.0'
-  spec.add_dependency 'actionview', '>= 3.2', '< 5.0'
-  spec.add_dependency 'activemodel', '>= 3.2', '< 5.0'
+  spec.add_dependency 'rails', '>= 3.2', '< 5.0'
   spec.add_dependency 'font-awesome-rails', '~> 4.0'
   spec.add_dependency 'chronic_duration', '~> 0.10'
   spec.add_dependency 'phony', '~> 2.0'
 
   spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency 'sqlite3'
 end
