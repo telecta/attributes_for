@@ -46,7 +46,7 @@ Preferred icon and CSS framework is [Font Awesome][fontawesome] Bring
 ## Sample Application
 
 Sample application using `attributes_for` can be found
-[here](https://github.com/blacktangent/attributes_for).
+[here](https://github.com/blacktangent/attributes_for-demo).
 
 ## Usage
 
