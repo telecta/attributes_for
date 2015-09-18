@@ -8,6 +8,7 @@ module AttributesFor
 
       class AttributeBuilder
         include ActionView::Helpers
+        include FontAwesome::Rails::IconHelper
 
         attr_accessor :object, :template
 
@@ -15,20 +16,28 @@ module AttributesFor
           @object, @template = object, template
         end
 
-        def string(label, options = {}, &block)
-          wrap_content(" #{label}: " + template.capture(&block), options)
+        def method_missing(method, *args, &block)
+          build_content(method, *args, &block)
         end
 
-        def method_missing(m, *args, &block)
-          build_content(m, *args, &block)
+        def string(label, options = {}, &block)
+          wrap_content(label, template.capture(&block), options)
         end
 
         private
 
         def build_content(method, attribute_name, options = {}, &block)
+          content = format_attribute(method, attribute_name, options, &block)
+
+          options[:icon] ||= icon_map(method)
+
+          wrap_content(human_name(attribute_name), content, options)
+        end
+
+        def format_attribute(method, attribute_name, options = {}, &block)
           value = object.public_send(attribute_name)
 
-          content = if block_given?
+          if block_given?
             template.capture(&block)
           elsif value.to_s.empty?
             I18n.t "attributes_for.not_set"
@@ -51,20 +60,21 @@ module AttributesFor
               value
             end
           end
-
-          options[:class] ||= icon_map(method)
-          options[:id]    ||= attribute_name.to_s
-
-          wrap_content(label(attribute_name, options) + content, options)
         end
 
-        def wrap_content(content, options = {})
-          content_tag(:i, content, id: options[:id], class: options[:class])
-        end
+        def wrap_content(label, content, options)
+          html_options         = options[:html] || {}
+          html_options[:id]    = options.delete(:id) if options.key?(:id)
+          html_options[:class] = options.delete(:class) if options.key?(:class)
 
-        def label(attribute, options)
-          return " ".html_safe if options[:label] === false
-          " #{human_name(attribute)}: ".html_safe
+          content = "#{label}: " + content unless options[:label] === false
+          content = content_tag(:span, content.html_safe, html_options)
+
+          if options[:icon]
+            content = fa_icon(options[:icon], text: content)
+          end
+
+          content
         end
 
         def human_name(attribute)
@@ -73,12 +83,12 @@ module AttributesFor
 
         def icon_map(method)
           {
-            boolean:  'fa fa-check',
-            date:     'fa fa-calendar',
-            duration: 'fa fa-clock-o',
-            email:    'fa fa-envelope',
-            phone:    'fa fa-phone',
-            url:      'fa fa-globe',
+            boolean:  'check',
+            date:     'calendar',
+            duration: 'clock-o',
+            email:    'envelope',
+            phone:    'phone',
+            url:      'globe',
           }[method]
         end
 
