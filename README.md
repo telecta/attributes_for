@@ -87,6 +87,7 @@ Available options:
 * __:label__ - Disables label if set to false
 * __:css__ - Override element's CSS
 * __:id__ - Set element's ID
+* __:format__ - Used with `date` helper to format dates.
 
 ## Development
 
