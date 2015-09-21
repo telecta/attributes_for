@@ -1,6 +1,16 @@
 # Changelog
 
-## [0.4.4] - 2015-09-10
+## [0.5.0] - 2015-21-09
+### Fixed
+- Use font-awesome-rails `fa_icon` helper to handle icons. Icons are now
+  positioned in front of content instead of wrapping it.
+- Fixed tests.
+
+### Changed
+- Use options[:icon] to handle Font Awesome icons.
+- Wrap key-val pairs with <span> tags.
+
+## [0.4.4] - 2015-09-09
 ### Fixed
 - Explicitly require dependencies.
 
