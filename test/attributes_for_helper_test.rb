@@ -120,7 +120,14 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "options[:class] set to 'fa fa-user' renders element with given class(es)" do
+  test "options[:icon] set to 'users' renders element with the given icon" do
+    expected = "<i class=\"fa fa-users\"></i> <span>Name: Project 1</span>"
+    assert_attributes_for(expected, object) do |b|
+      b.attribute :name, icon: "users"
+    end
+  end
+
+  test "options[:class] set to 'label' renders element with given class(es)" do
     expected = "<span class=\"label\">Name: Project 1</span>"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, class: 'label'

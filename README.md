@@ -57,14 +57,14 @@ strings can also be presented using the `string` method.
 ```erb
 <ul class="list-unstyled">
   <%= attributes_for @company do |b| %>
-    <li><%= b.attribute :name, class: 'fa fa-building-o' %></li>
+    <li><%= b.attribute :name, icon: 'building-o' %></li>
     <li><%= b.phone :phone %></li>
-    <li><%= b.phone :fax, class: 'fa fa-fax' %></li>
+    <li><%= b.phone :fax, icon: 'fax' %></li>
     <li><%= b.email :email %></li>
     <li><%= b.email :support_email %></li>
     <li><%= b.url :website, id: :site %></li>
     <li>
-      <%= b.attribute(:user, class: 'fa fa-user') do %>
+      <%= b.attribute(:user, icon: 'user') do %>
         <%= link_to @company.user_name, url_for(@company.user) %>
       <% end %>
     </li>
@@ -88,6 +88,7 @@ Available options:
 * __:css__ - Override element's CSS
 * __:id__ - Set element's ID
 * __:format__ - Used with `date` helper to format dates.
+* __:icon__ - Name of Font Awesome icon to use.
 
 ## Development
 
