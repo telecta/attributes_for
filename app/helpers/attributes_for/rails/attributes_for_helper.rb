@@ -57,7 +57,7 @@ module AttributesFor
             when :url
               link_to(value, value, title: human_name(attribute_name))
             else
-              value
+              value.to_s
             end
           end
         end

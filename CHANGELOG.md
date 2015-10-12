@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.1] - 2015-12-10
+### Fixed
+- `attribute` helper explicitly casts integer to string.
+
 ## [0.5.0] - 2015-21-09
 ### Fixed
 - Use font-awesome-rails `fa_icon` helper to handle icons. Icons are now

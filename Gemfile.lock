@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    attributes_for (0.5.0)
+    attributes_for (0.5.1)
       chronic_duration (~> 0.10)
       font-awesome-rails (~> 4.0)
       phony (~> 2.0)

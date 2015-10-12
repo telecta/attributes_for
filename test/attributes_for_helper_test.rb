@@ -9,6 +9,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "#attribute render an integer" do
+    expected = "<span>Billing Frequency: 15</span>"
+    assert_attributes_for(expected, object) do |b|
+      b.attribute :billing_frequency
+    end
+  end
+
   test "#attribute renders 'Not set' if the attribute is nil" do
     store_translations(:en, attributes_for: {not_set: "Not set" }) do
       expected = "<span>Fax: Not set</span>"
@@ -138,7 +145,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
 
   def object
     @o ||= Struct.new(
-      :id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at
+      :id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at, :billing_frequency
 
     ) do
       def self.human_attribute_name(attribute, options = {})
@@ -147,7 +154,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
 
     end.new(
       1, "Project 1", "+4723232323", nil, "name@example.com",
-      "http://example.com", 123456, true, DateTime.new(2001, 1, 1)
+      "http://example.com", 123456, true, DateTime.new(2001, 1, 1), 15
      )
   end
 
