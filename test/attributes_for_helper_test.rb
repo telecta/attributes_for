@@ -69,10 +69,24 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "#date renders date or datetime" do
-    expected = "<i class=\"fa fa-calendar\"></i> <span>Created At: Mon, 01 Jan 2001 00:00:00 +0000</span>"
+  test "#date renders date for date" do
+    expected = "<i class=\"fa fa-calendar\"></i> <span>Due On: 2001-01-01</span>"
+    assert_attributes_for(expected, object) do |b|
+      b.date :due_on
+    end
+  end
+
+  test "#date renders only date for datetime" do
+    expected = "<i class=\"fa fa-calendar\"></i> <span>Created At: 2001-01-01</span>"
     assert_attributes_for(expected, object) do |b|
       b.date :created_at
+    end
+  end
+
+  test "#datetime renders datetime" do
+    expected = "<i class=\"fa fa-calendar\"></i> <span>Created At: Mon, 01 Jan 2001 00:00:00 +0000</span>"
+    assert_attributes_for(expected, object) do |b|
+      b.datetime :created_at
     end
   end
 
@@ -145,16 +159,18 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
 
   def object
     @o ||= Struct.new(
-      :id, :name, :phone, :fax, :email, :website, :duration, :active, :created_at, :billing_frequency
-
+      :id, :name, :phone, :fax, :email, :website, :duration, :active,
+      :created_at, :billing_frequency, :due_on
     ) do
+
       def self.human_attribute_name(attribute, options = {})
         I18n.t("activerecord.attributes.project.#{attribute}", options)
       end
 
     end.new(
       1, "Project 1", "+4723232323", nil, "name@example.com",
-      "http://example.com", 123456, true, DateTime.new(2001, 1, 1), 15
+      "http://example.com", 123456, true, DateTime.new(2001, 1, 1),
+      15, Date.new(2001, 1, 1)
      )
   end
 

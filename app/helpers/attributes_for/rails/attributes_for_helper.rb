@@ -46,6 +46,8 @@ module AttributesFor
             when :boolean
               I18n.t("attributes_for.#{value.to_s}")
             when :date
+              I18n.l(value.to_date, format: options[:format])
+            when :datetime
               I18n.l(value, format: options[:format])
             when :duration
               ChronicDuration.output(value, :keep_zero => true)
@@ -85,6 +87,7 @@ module AttributesFor
           {
             boolean:  'check',
             date:     'calendar',
+            datetime:     'calendar',
             duration: 'clock-o',
             email:    'envelope',
             phone:    'phone',
