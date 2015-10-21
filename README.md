@@ -70,7 +70,8 @@ strings can also be presented using the `string` method.
     </li>
     <li><%= b.duration :duration %></li>
     <li><%= b.boolean :active %></li>
-    <li><%= b.date :created_at, format: :long %> </li>
+    <li><%= b.date :due_on %></li>
+    <li><%= b.datetime :created_at, format: :long %></li>
     <li>
       <%= b.string "Label" do %>
         Content
