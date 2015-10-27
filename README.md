@@ -4,6 +4,7 @@
 [rubygems]: https://rubygems.org/gems/attributes_for
 [fontawesome]: https://fortawesome.github.io/Font-Awesome
 [fontawesomerails]: https://github.com/bokmann/font-awesome-rails
+[gemnasium]: https://gemnasium.com/blacktangent/attributes_for
 
 
 # AttributesFor
@@ -12,6 +13,7 @@
 [![Code Climate](https://codeclimate.com/github/blacktangent/attributes_for/badges/gpa.svg)][codeclimate]
 [![Test Coverage](http://img.shields.io/coveralls/blacktangent/attributes_for/master.svg)][coveralls]
 [![Gem Version](http://img.shields.io/gem/v/attributes_for.svg)][rubygems]
+[![Dependency Status](https://gemnasium.com/blacktangent/attributes_for.png)][gemnasium]
 
 ActiveView Helper to present formatted ActiveModel attributes with
 icons.
