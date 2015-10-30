@@ -3,17 +3,19 @@ module AttributesFor
     module AttributesForHelper
 
       def attributes_for(object, options = {}, &block)
-        capture AttributeBuilder.new(object, self), &block
+        capture AttributeBuilder.new(object, self, options), &block
       end
 
       class AttributeBuilder
         include ActionView::Helpers
         include FontAwesome::Rails::IconHelper
 
-        attr_accessor :object, :template
+        attr_accessor :object, :template, :default_options
 
-        def initialize(object, template)
-          @object, @template = object, template
+        def initialize(object, template, options = {})
+          @object = object
+          @template = template
+          @default_options = options[:defaults] || {}
         end
 
         def method_missing(method, *args, &block)
@@ -70,7 +72,7 @@ module AttributesFor
           html_options[:class] = options.delete(:class) if options.key?(:class)
 
           unless options[:label] === false
-            content = content_tag(:span, "#{label}:", html_options) + " " + content
+            content = content_tag(:span, "#{label}:", apply_html_options(html_options)) + " " + content
           end
 
           if options[:icon]
@@ -78,6 +80,10 @@ module AttributesFor
           end
 
           content
+        end
+
+        def apply_html_options(options)
+          default_options.merge(options)
         end
 
         def human_name(attribute)

@@ -2,6 +2,13 @@ require "test_helper"
 
 class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
 
+  test "attributes_for options[:default] renders all attribute with default options" do
+    expected = "<span class=\"label\">Name:</span> Project 1"
+    assert_attributes_for(expected, object, defaults: { class: 'label' }) do |b|
+      b.attribute :name
+    end
+  end
+
   test "#attribute renders a label followed by value of the object attribute" do
     expected = "<span>Name:</span> Project 1"
     assert_attributes_for(expected, object) do |b|
@@ -127,28 +134,28 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "options[:label] set to false, renders without label" do
+  test "#attribute options[:label] set to false, renders without label" do
     expected = "Project 1"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, label: false
     end
   end
 
-  test "options[:id] set to 'new_id', renders element with custom id" do
+  test "#attribute options[:id] set to 'new_id', renders element with custom id" do
     expected = "<span id=\"new_id\">Name:</span> Project 1"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, id: "new_id"
     end
   end
 
-  test "options[:icon] set to 'users' renders element with the given icon" do
+  test "#attribute options[:icon] set to 'users' renders element with the given icon" do
     expected = "<i class=\"fa fa-users\"></i> <span>Name:</span> Project 1"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, icon: "users"
     end
   end
 
-  test "options[:class] set to 'label' renders element with given class(es)" do
+  test "#attribute options[:class] set to 'label' renders element with given class(es)" do
     expected = "<span class=\"label\">Name:</span> Project 1"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, class: 'label'
