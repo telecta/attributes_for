@@ -69,8 +69,9 @@ module AttributesFor
           html_options[:id]    = options.delete(:id) if options.key?(:id)
           html_options[:class] = options.delete(:class) if options.key?(:class)
 
-          content = "#{label}: " + content unless options[:label] === false
-          content = content_tag(:span, content.html_safe, html_options)
+          unless options[:label] === false
+            content = content_tag(:span, "#{label}:", html_options) + " " + content
+          end
 
           if options[:icon]
             content = fa_icon(options[:icon], text: content)
