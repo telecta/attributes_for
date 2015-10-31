@@ -56,6 +56,19 @@ Present attributes using the API in the example below. It can also generate a
 standard label value pair given an attribute name using the `attribute` method. Arbitrary
 strings can also be presented using the `string` method.
 
+Passing `:defaults` to `attributes_for` gives the option to all
+attributes. This option you can typically use when you want add styling
+to the label of each attribute.
+
+```erb
+<ul class="list-unstyled">
+  <%= attributes_for @company, defaults: { class: 'label' } do |b| %>
+    <li><%= b.attribute :name, icon: 'building-o' %></li>
+  <% end %>
+</ul>
+```
+Here is a complete example using all possible options.
+
 ```erb
 <ul class="list-unstyled">
   <%= attributes_for @company do |b| %>
