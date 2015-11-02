@@ -86,11 +86,15 @@ module AttributesFor
               :span,
               "#{label}:",
               apply_html_options(html_options)
-            ) + ' ' + content
+            ) + ' ' + wrap_value(content)
           end
 
           content = fa_icon(options[:icon], text: content) if options[:icon]
           content
+        end
+
+        def wrap_value(content)
+          content_tag(:span, content)
         end
 
         def apply_html_options(options)
