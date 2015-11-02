@@ -69,7 +69,7 @@ to the label of each attribute.
 ```
 
 `attributes_for` wraps labels and values in `span` tags by default. Passing
-`:wrappers` to `attributes_for` gives the options to change the wrapper.
+`:wrappers` to `attributes_for` gives you the option to change the wrapper.
 
 ```erb
 <ul class="list-unstyled">
