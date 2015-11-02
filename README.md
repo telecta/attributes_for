@@ -67,6 +67,18 @@ to the label of each attribute.
   <% end %>
 </ul>
 ```
+
+`attributes_for` wraps labels and values in `span` tags by default. Passing
+`:wrappers` to `attributes_for` gives the options to change the wrapper.
+
+```erb
+<ul class="list-unstyled">
+  <%= attributes_for @company, wrappers: { label: 'strong' } do |b| %>
+    <li><%= b.attribute :name, icon: 'building-o' %></li>
+  <% end %>
+</ul>
+```
+
 Here is a complete example using all possible options.
 
 ```erb

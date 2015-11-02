@@ -9,6 +9,20 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "attributes_for options[:wrappers][:label] renders with given label wrapper tag" do
+    expected = '<strong>Name:</strong> <span>Project 1</span>'
+    assert_attributes_for(expected, object, wrappers: { label: 'strong' }) do |b|
+      b.attribute :name
+    end
+  end
+
+  test "attributes_for options[:wrappers][:value] renders with given value wrapper tag" do
+    expected = '<span>Name:</span> <strong>Project 1</strong>'
+    assert_attributes_for(expected, object, wrappers: { value: 'strong' }) do |b|
+      b.attribute :name
+    end
+  end
+
   test "#attribute renders a label followed by value of the object attribute" do
     expected = "<span>Name:</span> <span>Project 1</span>"
     assert_attributes_for(expected, object) do |b|

@@ -10,12 +10,14 @@ module AttributesFor
         include ActionView::Helpers
         include FontAwesome::Rails::IconHelper
 
-        attr_accessor :object, :template, :default_options
+        attr_accessor :object, :template, :default_options, :wrappers
 
         def initialize(object, template, options = {})
           @object = object
           @template = template
           @default_options = options[:defaults] || {}
+          @wrappers = { label: 'span', value: 'span' }
+          @wrappers.merge!(options[:wrappers]) if options.key?(:wrappers)
         end
 
         def method_missing(method, *args, &block)
@@ -83,7 +85,7 @@ module AttributesFor
 
           unless options[:label] === false
             content = content_tag(
-              :span,
+              wrappers[:label],
               "#{label}:",
               apply_html_options(html_options)
             ) + ' ' + wrap_value(content)
@@ -94,7 +96,7 @@ module AttributesFor
         end
 
         def wrap_value(content)
-          content_tag(:span, content)
+          content_tag(wrappers[:value], content)
         end
 
         def apply_html_options(options)
