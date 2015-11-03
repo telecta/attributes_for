@@ -23,10 +23,17 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "attributes_for options[:label_html] renders the label with the given options" do
+  test "#attribute options[:label_html] renders the label with the given options" do
     expected = '<span class="label label-default">Name:</span> <span>Project 1</span>'
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, label_html: { class: 'label label-default' }
+    end
+  end
+
+  test "#attribute options[:value_html] reners the value with the given options" do
+    expected = '<span>Name:</span> <span class="highlight">Project 1</span>'
+    assert_attributes_for(expected, object) do |b|
+      b.attribute :name, value_html: { class: 'highlight' }
     end
   end
 

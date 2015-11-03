@@ -81,14 +81,17 @@ module AttributesFor
         end
 
         def wrap_content(label, content, options)
-          label_html = {}
-          label_html = options.delete(:label_html) if options.key?(:label_html)
+          label_html_options = {}
+          label_html_options = options.delete(:label_html) if options.key?(:label_html)
+
+          value_html_options = {}
+          value_html_options = options.delete(:value_html) if options.key?(:value_html)
 
           unless options[:label] === false
             content = content_tag(wrappers[:label],
               "#{label}:",
-              apply_label_html_options(label_html)
-            ) + ' ' + wrap_value(content)
+              apply_label_html_options(label_html_options)
+            ) + ' ' + wrap_value(content, apply_value_html_options(value_html_options))
           end
 
           content = fa_icon(options[:icon], text: content) if options[:icon]
@@ -103,8 +106,16 @@ module AttributesFor
           end
         end
 
-        def wrap_value(content)
-          content_tag(wrappers[:value], content)
+        def apply_value_html_options(value_options)
+          if default_options.key?(:value_html)
+            default_options[:value_html].merge(value_options)
+          else
+            value_options
+          end
+        end
+
+        def wrap_value(content, options = {})
+          content_tag(wrappers[:value], content, options)
         end
 
         def human_name(attribute)
