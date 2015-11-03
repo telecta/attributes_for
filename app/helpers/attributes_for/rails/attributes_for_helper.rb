@@ -10,14 +10,16 @@ module AttributesFor
         include ActionView::Helpers
         include FontAwesome::Rails::IconHelper
 
-        attr_accessor :object, :template, :default_options, :wrappers
+        attr_accessor :object, :template, :default_options, :wrappers,
+          :options
 
         def initialize(object, template, options = {})
           @object = object
           @template = template
           @default_options = options[:defaults] || {}
+
           @wrappers = { label: 'span', value: 'span' }
-          @wrappers.merge!(options[:wrappers]) if options.key?(:wrappers)
+          @wrappers.merge!(options.delete(:wrappers)) if options.key?(:wrappers)
         end
 
         def method_missing(method, *args, &block)
@@ -79,15 +81,13 @@ module AttributesFor
         end
 
         def wrap_content(label, content, options)
-          html_options         = options[:html] || {}
-          html_options[:id]    = options.delete(:id) if options.key?(:id)
-          html_options[:class] = options.delete(:class) if options.key?(:class)
+          label_html = {}
+          label_html = options.delete(:label_html) if options.key?(:label_html)
 
           unless options[:label] === false
-            content = content_tag(
-              wrappers[:label],
+            content = content_tag(wrappers[:label],
               "#{label}:",
-              apply_html_options(html_options)
+              apply_label_html_options(label_html)
             ) + ' ' + wrap_value(content)
           end
 
@@ -95,12 +95,16 @@ module AttributesFor
           content
         end
 
-        def wrap_value(content)
-          content_tag(wrappers[:value], content)
+        def apply_label_html_options(label_options)
+          if default_options.key?(:label_html)
+            default_options[:label_html].merge(label_options)
+          else
+            label_options
+          end
         end
 
-        def apply_html_options(options)
-          default_options.merge(options)
+        def wrap_value(content)
+          content_tag(wrappers[:value], content)
         end
 
         def human_name(attribute)

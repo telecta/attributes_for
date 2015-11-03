@@ -4,7 +4,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
 
   test "attributes_for options[:defaults] renders all attribute with default options" do
     expected = "<span class=\"label\">Name:</span> <span>Project 1</span>"
-    assert_attributes_for(expected, object, defaults: { class: 'label' }) do |b|
+    assert_attributes_for(expected, object, defaults: { label_html: { class: 'label' }}) do |b|
       b.attribute :name
     end
   end
@@ -20,6 +20,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     expected = '<span>Name:</span> <strong>Project 1</strong>'
     assert_attributes_for(expected, object, wrappers: { value: 'strong' }) do |b|
       b.attribute :name
+    end
+  end
+
+  test "attributes_for options[:label_html] renders the label with the given options" do
+    expected = '<span class="label label-default">Name:</span> <span>Project 1</span>'
+    assert_attributes_for(expected, object) do |b|
+      b.attribute :name, label_html: { class: 'label label-default' }
     end
   end
 
@@ -135,7 +142,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   test "#string renders a string with content" do
     expected = "<span id=\"new_id\" class=\"custom\">String:</span> <span>Content</span>"
     assert_attributes_for(expected, object) do |b|
-      b.string("String", id: "new_id", class: "custom") do
+      b.string("String", label_html: { id: 'new_id', class: 'custom' }) do
         "Content"
       end
     end
@@ -155,24 +162,10 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "#attribute options[:id] set to 'new_id', renders element with custom id" do
-    expected = "<span id=\"new_id\">Name:</span> <span>Project 1</span>"
-    assert_attributes_for(expected, object) do |b|
-      b.attribute :name, id: "new_id"
-    end
-  end
-
   test "#attribute options[:icon] set to 'users' renders element with the given icon" do
     expected = "<i class=\"fa fa-users\"></i> <span>Name:</span> <span>Project 1</span>"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, icon: "users"
-    end
-  end
-
-  test "#attribute options[:class] set to 'label' renders element with given class(es)" do
-    expected = "<span class=\"label\">Name:</span> <span>Project 1</span>"
-    assert_attributes_for(expected, object) do |b|
-      b.attribute :name, class: 'label'
     end
   end
 
