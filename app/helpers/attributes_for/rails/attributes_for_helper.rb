@@ -14,12 +14,14 @@ module AttributesFor
           :options
 
         def initialize(object, template, options = {})
-          @object = object
+          @object   = object
           @template = template
           @default_options = options[:defaults] || {}
 
           @wrappers = { label: 'span', value: 'span' }
           @wrappers.merge!(options.delete(:wrappers)) if options.key?(:wrappers)
+
+          @empty    = options.delete(:empty) if options.key?(:empty)
         end
 
         def method_missing(method, *args, &block)
@@ -32,13 +34,17 @@ module AttributesFor
 
         private
 
+        def empty_value
+          @empty || I18n.t('attributes_for.not_set')
+        end
+
         def build_value(method, attribute_name, options = {}, &block)
           if block_given?
             template.capture(&block)
           else
             value = object.public_send(attribute_name)
             if value.to_s.empty?
-              I18n.t 'attributes_for.not_set'
+              empty_value
             else
               format_value(
                 method,

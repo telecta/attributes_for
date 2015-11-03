@@ -23,6 +23,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "attributesfor options[:empty] renders empty values as given value" do
+    expected = '<span>Fax:</span> <span>-</span>'
+    assert_attributes_for(expected, object, empty: '-') do |b|
+      b.attribute :fax
+    end
+  end
+
   test "#attribute options[:label_html] renders the label with the given options" do
     expected = '<span class="label label-default">Name:</span> <span>Project 1</span>'
     assert_attributes_for(expected, object) do |b|

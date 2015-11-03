@@ -56,29 +56,6 @@ Present attributes using the API in the example below. It can also generate a
 standard label value pair given an attribute name using the `attribute` method. Arbitrary
 strings can also be presented using the `string` method.
 
-Passing `:defaults` to `attributes_for` gives the option to all
-attributes. This option you can typically use when you want add styling
-to the label of each attribute.
-
-```erb
-<ul class="list-unstyled">
-  <%= attributes_for @company, defaults: { class: 'label' } do |b| %>
-    <li><%= b.attribute :name, icon: 'building-o' %></li>
-  <% end %>
-</ul>
-```
-
-`attributes_for` wraps labels and values in `span` tags by default. Passing
-`:wrappers` to `attributes_for` gives you the option to change the wrapper.
-
-```erb
-<ul class="list-unstyled">
-  <%= attributes_for @company, wrappers: { label: 'strong' } do |b| %>
-    <li><%= b.attribute :name, icon: 'building-o' %></li>
-  <% end %>
-</ul>
-```
-
 Here is a complete example using all possible options.
 
 ```erb
@@ -106,6 +83,50 @@ Here is a complete example using all possible options.
     </li>
   <% end %>
 </ul>
+```
+
+Passing `:label_html` or `:value_html` to `#attribute` adds the given
+options to the `label` and `value` wrapper tags.
+
+```erb
+<ul class="list-unstyled">
+  <%= attributes_for @product, defaults: { label_html: { class: 'label' } } do |b|
+    <li><%= b.attribute :price, icon: 'money', value_html: { class: 'pull-right' } %></li>
+  <% end %>
+</ul>
+```
+
+Passing `:defaults` to `attributes_for` gives the option to all
+attributes. This option you can typically use when you want add styling
+to the label of each attribute.
+
+```erb
+<ul class="list-unstyled">
+  <%= attributes_for @company, defaults: { label_html: { class: 'label' } } do |b| %>
+    <li><%= b.attribute :name, icon: 'building-o' %></li>
+  <% end %>
+</ul>
+```
+
+`attributes_for` wraps labels and values in `span` tags by default. Passing
+`:wrappers` to `attributes_for` gives you the option to change the wrapper.
+
+```erb
+<ul class="list-unstyled">
+  <%= attributes_for @company, wrappers: { label: 'strong' } do |b| %>
+    <li><%= b.attribute :name, icon: 'building-o' %></li>
+  <% end %>
+</ul>
+```
+
+Passing `:empty` to `attributes_for` overrides the default empty value.
+
+```erb
+<dl>
+  <%= attributes_for @company, wrappers: { label: 'dt', value: 'dd' }, empty: '-' do |b| %>
+    <%= b.attribute :fax %>
+  <% end %>
+</dl>
 ```
 
 ## Options
