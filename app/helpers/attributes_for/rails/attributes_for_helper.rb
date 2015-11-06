@@ -56,11 +56,11 @@ module AttributesFor
         end
 
         def build_content(method, attribute_name, options = {}, &block)
-          content = build_value(method, attribute_name, options, &block)
+          value = build_value(method, attribute_name, options, &block)
 
           options[:icon] ||= icon_map(method)
 
-          wrap_content(human_name(attribute_name), content, options)
+          wrap_content(human_name(attribute_name), value, options)
         end
 
         def format_value(method, value, options = {})
@@ -86,42 +86,37 @@ module AttributesFor
           end
         end
 
-        def wrap_content(label, content, options)
+        def wrap_content(label, value, options)
           label_html_options = {}
           label_html_options = options.delete(:label_html) if options.key?(:label_html)
 
           value_html_options = {}
           value_html_options = options.delete(:value_html) if options.key?(:value_html)
 
+          content = content_tag(
+            wrappers[:value],
+            value,
+            apply_default_options(:value_html, value_html_options)
+          )
+
           unless options[:label] === false
-            content = content_tag(wrappers[:label],
+            content = content_tag(
+              wrappers[:label],
               "#{label}:",
-              apply_label_html_options(label_html_options)
-            ) + ' ' + wrap_value(content, apply_value_html_options(value_html_options))
+              apply_default_options(:label_html, label_html_options)
+            ) + ' ' + content
           end
 
           content = fa_icon(options[:icon], text: content) if options[:icon]
           content
         end
 
-        def apply_label_html_options(label_options)
-          if default_options.key?(:label_html)
-            default_options[:label_html].merge(label_options)
+        def apply_default_options(key, options)
+          if default_options.key?(key)
+            default_options[key].merge(options)
           else
-            label_options
+            options
           end
-        end
-
-        def apply_value_html_options(value_options)
-          if default_options.key?(:value_html)
-            default_options[:value_html].merge(value_options)
-          else
-            value_options
-          end
-        end
-
-        def wrap_value(content, options = {})
-          content_tag(wrappers[:value], content, options)
         end
 
         def human_name(attribute)

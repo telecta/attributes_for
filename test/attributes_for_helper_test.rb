@@ -170,7 +170,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
   end
 
   test "#attribute options[:label] set to false, renders without label" do
-    expected = "Project 1"
+    expected = "<span>Project 1</span>"
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, label: false
     end
