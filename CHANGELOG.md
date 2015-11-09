@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.1] - 2015-10-29
+### Changed
+- Updated dependencies.
+
+## [0.6.0] - 2015-10-21
+### Added
+- `date` and `datetime` helpers formats/converts to date and datetime.
+
 ## [0.5.1] - 2015-12-10
 ### Fixed
 - `attribute` helper explicitly casts integer to string.
