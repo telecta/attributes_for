@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.0] - 2015-11-09
+### Added
+- Wrap label and value in tags.
+- `:defaults` options. Apply same options to all elements.
+- `:wrapper` options (change default wrappers).
+- `:label_html` and `:value_html` to set attributes on tags.
+### Changed
+- Improved implementation slightly.
+
 ## [0.6.1] - 2015-10-29
 ### Changed
 - Updated dependencies.
