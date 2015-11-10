@@ -6,6 +6,7 @@
 - `:defaults` options. Apply same options to all elements.
 - `:wrapper` options (change default wrappers).
 - `:label_html` and `:value_html` to set attributes on tags.
+
 ### Changed
 - Improved implementation slightly.
 
