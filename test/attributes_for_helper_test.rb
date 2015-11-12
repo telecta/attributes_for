@@ -183,6 +183,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "#attrbiute options[:id] sets the id to the label element" do
+    expected = '<span id="name">Name:</span> <span>Project 1</span>'
+    assert_attributes_for(expected, object) do |b|
+      b.attribute :name, id: :name
+    end
+  end
+
   private
 
   def object

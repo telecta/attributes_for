@@ -89,6 +89,7 @@ module AttributesFor
         def wrap_content(label, value, options)
           label_html_options = {}
           label_html_options = options.delete(:label_html) if options.key?(:label_html)
+          label_html_options[:id] = options.delete(:id) if options.key?(:id)
 
           value_html_options = {}
           value_html_options = options.delete(:value_html) if options.key?(:value_html)

@@ -131,7 +131,12 @@ Passing `:empty` to `attributes_for` overrides the default empty value.
 
 ## Options
 
-Available options:
+`#attributes_for` options:
+
+* __:defaults__ - Use these options on all `#attribute` calls.
+* __:wrappers__ - Change default wrapper tags.
+
+`#attribute` options:
 
 * __:label__ - Disables label if set to false
 * __:css__ - Override element's CSS
