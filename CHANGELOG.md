@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.1] - 2015-11-12
+### Fixed
+- Fix regression. Support `:id` option.
+
 ## [0.7.0] - 2015-11-09
 ### Added
 - Wrap label and value in tags.
