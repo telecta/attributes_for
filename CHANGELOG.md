@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.2] - 2015-11-12
+### Fixed
+- Set id on value element instead of label (label can be optional).
+
 ## [0.7.1] - 2015-11-12
 ### Fixed
 - Fix regression. Support `:id` option.
