@@ -14,6 +14,7 @@ module AttributesFor
           :options
 
         def initialize(object, template, options = {})
+          options = options.dup
           @object   = object
           @template = template
           @default_options = options[:defaults] || {}
