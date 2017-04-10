@@ -36,7 +36,7 @@ module AttributesFor
         private
 
         def empty_value
-          @empty || I18n.t('attributes_for.not_set')
+          @empty ||= I18n.t('attributes_for.not_set')
         end
 
         def build_value(method, attribute_name, options = {}, &block)
