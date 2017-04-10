@@ -3,6 +3,7 @@ rvm:
 - 1.9.3
 - 2.2.6
 - 2.3.3
+- 2.4.0
 before_install: gem install bundler -v 1.10.3
 notifications:
   slack:
