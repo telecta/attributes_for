@@ -20,11 +20,12 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.0'
 
-  spec.add_dependency 'rails', '>= 3.2', '< 5.0'
+  spec.add_dependency 'rails', '>= 3.2', '< 6'
   spec.add_dependency 'font-awesome-rails', '~> 4.0'
   spec.add_dependency 'chronic_duration', '~> 0.10'
   spec.add_dependency 'phony', '~> 2.0'
 
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency "appraisal"
 end
