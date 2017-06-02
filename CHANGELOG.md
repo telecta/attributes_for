@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.9] - 2017-06-02
+### Added
+- Add Rails 5x support
+
 ## [0.7.3] - 2015-11-24
 ### Changed
 - Update dependencies
