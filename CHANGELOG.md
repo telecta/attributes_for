@@ -2,6 +2,10 @@
 
 ## [0.7.10] - 2017-07-04
 ### Fixed
+- Update Rails-specific lockfiles
+
+## [0.7.10] - 2017-07-04
+### Fixed
 - Treat blank (but not empty) attribute value as "not set"
 
 ## [0.7.9] - 2017-06-02
