@@ -44,7 +44,7 @@ module AttributesFor
             template.capture(&block)
           else
             value = object.public_send(attribute_name)
-            if value.to_s.empty?
+            if value.to_s.blank?
               empty_value
             else
               format_value(
