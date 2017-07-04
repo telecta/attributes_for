@@ -111,6 +111,14 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "blank #phone renders without phone link" do
+    object.phone = "\t"
+    expected = "<i class=\"fa fa-phone\"></i> <span>Phone:</span> <span>#{I18n.t('attributes_for.not_set')}</span>"
+    assert_attributes_for(expected, object) do |b|
+      b.phone :phone
+    end
+  end
+
   test "#date renders date for date" do
     expected = "<i class=\"fa fa-calendar\"></i> <span>Due On:</span> <span>2001-01-01</span>"
     assert_attributes_for(expected, object) do |b|
@@ -183,7 +191,7 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
-  test "#attrbiute options[:id] sets the id to the label element" do
+  test "#attribute options[:id] sets the id to the label element" do
     expected = '<span>Name:</span> <span id="name">Project 1</span>'
     assert_attributes_for(expected, object) do |b|
       b.attribute :name, id: :name
