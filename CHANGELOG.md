@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.1] - 2018-05-06
+### Added
+- Fix tests
+
 ## [0.8.0] - 2018-05-06
 ### Added
 - Add no_colon option
