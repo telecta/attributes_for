@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    attributes_for (0.7.11)
+    attributes_for (0.8.0)
       chronic_duration (~> 0.10)
       font-awesome-rails (~> 4.0)
       phony (~> 2.0)
@@ -61,8 +61,8 @@ GEM
       tins (~> 1.6)
     docile (1.1.5)
     erubis (2.7.0)
-    font-awesome-rails (4.7.0.2)
-      railties (>= 3.2, < 5.2)
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.4)
@@ -79,7 +79,7 @@ GEM
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
     numerizer (0.1.1)
-    phony (2.15.46)
+    phony (2.16.4)
     rack (1.6.8)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -140,4 +140,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.15.1
+   1.16.1
