@@ -102,9 +102,11 @@ module AttributesFor
           )
 
           unless options[:label] === false
+            text = default_options[:no_colon] === true ? label : "#{label}:"
+
             content = content_tag(
               wrappers[:label],
-              "#{label}:",
+              text,
               apply_default_options(:label_html, label_html_options)
             ) + ' ' + content
           end

@@ -9,6 +9,13 @@ class AttributesFor::Rails::AttributesForHelperTest < ActionView::TestCase
     end
   end
 
+  test "attributes_for options[:defaults][:no_colon] renders label without colon" do
+    expected = "<span class=\"label\">Name</span> <span>Project 1</span>"
+    assert_attributes_for(expected, object, defaults: { no_colon: true, label_html: { class: 'label' }}) do |b|
+      b.attribute :name
+    end
+  end
+
   test "attributes_for options[:wrappers][:label] renders with given label wrapper tag" do
     expected = '<strong>Name:</strong> <span>Project 1</span>'
     assert_attributes_for(expected, object, wrappers: { label: 'strong' }) do |b|
