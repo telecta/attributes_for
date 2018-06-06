@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.8.0] - 2018-05-06
+### Added
+- Add no_colon option
+
 ## [0.7.10] - 2017-07-04
-### Fixed
-- Update Rails-specific lockfiles
+### fixed
+- update rails-specific lockfiles
 
 ## [0.7.10] - 2017-07-04
 ### Fixed
